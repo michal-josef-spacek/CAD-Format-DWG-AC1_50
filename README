@@ -6,12 +6,42 @@ SYNOPSIS
 
      my $dwg = CAD::Format::DWG::AC1_40->new;
      my $dwg = CAD::Format::DWG::AC1_40::from_file($dwg_file);
-     my $header_hr = $dwg->header;
-     my $entities_hr = $dwg->entities;
+     my $header = $dwg->header;
+     my $entities_ar = $dwg->entities;
 
 DESCRIPTION
     In distribution is kaitai structure definition file dwg_ac1_40.ksy which
     described AutoCAD DWG format version AC1.40.
+
+METHODS
+  "new"
+     my $dwg = CAD::Format::DWG::AC1_50->new;
+
+    Constructor.
+
+    Returns instance of object.
+
+  "from_file"
+     my $dwg = CAD::Format::DWG::AC1_50->from_file($dwg_file);
+
+    Create instance of object from DWG file.
+
+    Returns instance of object.
+
+  "header"
+     my $header = $dwg->header;
+
+    Get header of DWG file.
+
+    Returns instance of CAD::Format::DWG::AC1_50::Header object.
+
+  "entities"
+     my $entities_ar = $dwg->entities;
+
+    Get list of entities in DWG file.
+
+    Returns reference to array with CAD::Format::DWG::AC1_50::Entity
+    instances.
 
 DEPENDENCIES
     IO::KaitaiStruct.
