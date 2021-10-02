@@ -12,8 +12,8 @@ CAD::Format::DWG::AC1_40 - Read AutoCAD 1.40 DWG file.
 
  my $dwg = CAD::Format::DWG::AC1_40->new;
  my $dwg = CAD::Format::DWG::AC1_40::from_file($dwg_file);
- my $header = $dwg->header;
  my $entities_ar = $dwg->entities;
+ my $header = $dwg->header;
 
 =head1 DESCRIPTION
 
@@ -38,14 +38,6 @@ Create instance of object from DWG file.
 
 Returns instance of object.
 
-=head2 C<header>
-
- my $header = $dwg->header;
-
-Get header of DWG file.
-
-Returns instance of CAD::Format::DWG::AC1_50::Header object.
-
 =head2 C<entities>
 
  my $entities_ar = $dwg->entities;
@@ -53,6 +45,14 @@ Returns instance of CAD::Format::DWG::AC1_50::Header object.
 Get list of entities in DWG file.
 
 Returns reference to array with CAD::Format::DWG::AC1_50::Entity instances.
+
+=head2 C<header>
+
+ my $header = $dwg->header;
+
+Get header of DWG file.
+
+Returns instance of CAD::Format::DWG::AC1_50::Header object.
 
 =head1 DEPENDENCIES
 

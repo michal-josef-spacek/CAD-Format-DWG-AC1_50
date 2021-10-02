@@ -6,8 +6,8 @@ SYNOPSIS
 
      my $dwg = CAD::Format::DWG::AC1_40->new;
      my $dwg = CAD::Format::DWG::AC1_40::from_file($dwg_file);
-     my $header = $dwg->header;
      my $entities_ar = $dwg->entities;
+     my $header = $dwg->header;
 
 DESCRIPTION
     In distribution is kaitai structure definition file dwg_ac1_40.ksy which
@@ -28,13 +28,6 @@ METHODS
 
     Returns instance of object.
 
-  "header"
-     my $header = $dwg->header;
-
-    Get header of DWG file.
-
-    Returns instance of CAD::Format::DWG::AC1_50::Header object.
-
   "entities"
      my $entities_ar = $dwg->entities;
 
@@ -42,6 +35,13 @@ METHODS
 
     Returns reference to array with CAD::Format::DWG::AC1_50::Entity
     instances.
+
+  "header"
+     my $header = $dwg->header;
+
+    Get header of DWG file.
+
+    Returns instance of CAD::Format::DWG::AC1_50::Header object.
 
 DEPENDENCIES
     IO::KaitaiStruct.
