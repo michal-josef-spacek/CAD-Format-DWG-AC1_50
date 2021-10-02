@@ -1,7 +1,7 @@
+AC1_50.pm
 AC1_50.pod
 Changes
 dwg_ac1_50.ksy
-DwgAc150.pm
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm
