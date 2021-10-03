@@ -4,21 +4,21 @@
 
 =head1 NAME
 
-CAD::Format::DWG::AC1_40 - Read AutoCAD 1.40 DWG file.
+CAD::Format::DWG::AC1_50 - Read AutoCAD 1.50 DWG file.
 
 =head1 SYNOPSIS
 
- use CAD::Format::DWG::AC1_40;
+ use CAD::Format::DWG::AC1_50;
 
- my $dwg = CAD::Format::DWG::AC1_40->new;
- my $dwg = CAD::Format::DWG::AC1_40::from_file($dwg_file);
+ my $dwg = CAD::Format::DWG::AC1_50->new;
+ my $dwg = CAD::Format::DWG::AC1_50::from_file($dwg_file);
  my $entities_ar = $dwg->entities;
  my $header = $dwg->header;
 
 =head1 DESCRIPTION
 
-In distribution is kaitai structure definition file dwg_ac1_40.ksy which
-described AutoCAD DWG format version AC1.40.
+In distribution is kaitai structure definition file dwg_ac1_50.ksy which
+described AutoCAD DWG format version AC1.50.
 
 =head1 METHODS
 
@@ -60,7 +60,7 @@ L<IO::KaitaiStruct>.
 
 =head1 REPOSITORY
 
-L<https://github.com/michal-josef-spacek/CAD-Format-DWG-AC1_40.git>
+L<https://github.com/michal-josef-spacek/CAD-Format-DWG-AC1_50.git>
 
 =head1 AUTHOR
 
