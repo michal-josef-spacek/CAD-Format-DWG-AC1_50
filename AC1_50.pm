@@ -2482,7 +2482,7 @@ sub _read {
     $self->{insertion_base_x} = $self->{_io}->read_f8le();
     $self->{insertion_base_y} = $self->{_io}->read_f8le();
     $self->{insertion_base_z} = $self->{_io}->read_f8le();
-    $self->{number_of_entities} = $self->{_io}->read_s2le();
+    $self->{number_of_entities} = $self->{_io}->read_u2le();
     $self->{drawing_first_x} = $self->{_io}->read_f8le();
     $self->{drawing_first_y} = $self->{_io}->read_f8le();
     $self->{drawing_first_z} = $self->{_io}->read_f8le();

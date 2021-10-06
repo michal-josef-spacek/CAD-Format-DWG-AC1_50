@@ -146,7 +146,7 @@ types:
         type: f8
         doc: 0x006e-0x0075
       - id: number_of_entities
-        type: s2
+        type: u2
         doc: 0x0076-0x0077
       - id: drawing_first_x
         type: f8
