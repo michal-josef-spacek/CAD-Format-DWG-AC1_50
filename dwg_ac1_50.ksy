@@ -956,30 +956,42 @@ types:
         type: b1
   layer:
     seq:
-      - id: frozen
-        type: s1
+      - id: flag
+        type: layer_flag
         doc: LAYER/70
       - id: layer_name
-        size: 31
+        size: 32
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
         doc: LAYER/2
-      - id: unknown1
-        type: s1
       - id: color
-        type: s1
+        type: s2
         doc: LAYER/62
-      - id: unknown2
-        type: s1
       - id: linetype_index
-        type: s1
+        type: u2
         doc: LAYER/6
-      - id: unknown3
-        type: s1
       - id: unknown4
         type: s1
         if: _root.header.version_micro == 74
+  layer_flag:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: flag6
+        type: b1
+      - id: flag7
+        type: b1
+      - id: frozen
+        type: b1
   linetype:
     seq:
       - id: u2
