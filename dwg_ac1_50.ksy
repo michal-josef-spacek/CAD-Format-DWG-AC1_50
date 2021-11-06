@@ -1068,60 +1068,72 @@ types:
         repeat: eos
   style:
     seq:
-      - id: flag1_1
-        type: b1
-      - id: flag1_2
-        type: b1
-      - id: flag1_3
-        type: b1
-      - id: flag1_4
-        type: b1
-      - id: flag1_5
-        type: b1
-      - id: flag1_vertical
-        type: b1
-      - id: flag1_7
-        type: b1
-      - id: flag1_8
-        type: b1
-      - id: text
-        size: 31
+      - id: flag
+        type: style_flag
+        doc: STYLE/70
+      - id: style_name
+        size: 32
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
+        doc: STYLE/2
       - id: height
         type: f8
         doc: STYLE/40
-      - id: unknown1
-        type: u1
       - id: width_factor
         type: f8
         doc: STYLE/41
       - id: obliquing_angle_in_radians
         type: f8
         doc: STYLE/50
-      - id: flag2_1
-        type: b1
+      - id: generation
+        type: style_generation
         doc: STYLE/71
-      - id: flag2_2
-        type: b1
-      - id: flag2_3
-        type: b1
-      - id: flag2_4
-        type: b1
-      - id: flag2_5
-        type: b1
-      - id: flag2_upside_down
-        type: b1
-      - id: flag2_backwards
-        type: b1
-      - id: flag2_8
-        type: b1
-      - id: u12
+      - id: last_height
         type: f8
         doc: STYLE/42
       - id: font_file
         size: 64
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: STYLE/3
+  style_flag:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: vertical
+        type: b1
+      - id: flag7
+        type: b1
+      - id: load
+        type: b1
+  style_generation:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: upside_down
+        type: b1
+      - id: backwards
+        type: b1
+      - id: flag8
+        type: b1
   view:
     seq:
       - id: u1
