@@ -2603,7 +2603,85 @@ sub _read {
     $self->{dim_extension_line_second_suppress} = $self->{_io}->read_s1();
     $self->{dim_text_vertical_position} = $self->{_io}->read_s1();
     if ($self->version_micro() == 83) {
-        $self->{ufo} = $self->{_io}->read_bytes(235);
+        $self->{limits_check} = $self->{_io}->read_s2le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown10} = $self->{_io}->read_bytes(45);
+    }
+    if ($self->version_micro() == 83) {
+        $self->{elevation} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{thickness} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{view_point_x} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{view_point_y} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{view_point_z} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown11} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown12} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown13} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown14} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown15} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown16} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown17} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown18} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown19} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown20} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown21} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown22} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown23} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown24} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown25} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown26} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown27} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown28} = $self->{_io}->read_f8le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{unknown29} = $self->{_io}->read_s2le();
+    }
+    if ($self->version_micro() == 83) {
+        $self->{blip} = $self->{_io}->read_s2le();
     }
 }
 
@@ -3147,9 +3225,139 @@ sub dim_text_vertical_position {
     return $self->{dim_text_vertical_position};
 }
 
-sub ufo {
+sub limits_check {
     my ($self) = @_;
-    return $self->{ufo};
+    return $self->{limits_check};
+}
+
+sub unknown10 {
+    my ($self) = @_;
+    return $self->{unknown10};
+}
+
+sub elevation {
+    my ($self) = @_;
+    return $self->{elevation};
+}
+
+sub thickness {
+    my ($self) = @_;
+    return $self->{thickness};
+}
+
+sub view_point_x {
+    my ($self) = @_;
+    return $self->{view_point_x};
+}
+
+sub view_point_y {
+    my ($self) = @_;
+    return $self->{view_point_y};
+}
+
+sub view_point_z {
+    my ($self) = @_;
+    return $self->{view_point_z};
+}
+
+sub unknown11 {
+    my ($self) = @_;
+    return $self->{unknown11};
+}
+
+sub unknown12 {
+    my ($self) = @_;
+    return $self->{unknown12};
+}
+
+sub unknown13 {
+    my ($self) = @_;
+    return $self->{unknown13};
+}
+
+sub unknown14 {
+    my ($self) = @_;
+    return $self->{unknown14};
+}
+
+sub unknown15 {
+    my ($self) = @_;
+    return $self->{unknown15};
+}
+
+sub unknown16 {
+    my ($self) = @_;
+    return $self->{unknown16};
+}
+
+sub unknown17 {
+    my ($self) = @_;
+    return $self->{unknown17};
+}
+
+sub unknown18 {
+    my ($self) = @_;
+    return $self->{unknown18};
+}
+
+sub unknown19 {
+    my ($self) = @_;
+    return $self->{unknown19};
+}
+
+sub unknown20 {
+    my ($self) = @_;
+    return $self->{unknown20};
+}
+
+sub unknown21 {
+    my ($self) = @_;
+    return $self->{unknown21};
+}
+
+sub unknown22 {
+    my ($self) = @_;
+    return $self->{unknown22};
+}
+
+sub unknown23 {
+    my ($self) = @_;
+    return $self->{unknown23};
+}
+
+sub unknown24 {
+    my ($self) = @_;
+    return $self->{unknown24};
+}
+
+sub unknown25 {
+    my ($self) = @_;
+    return $self->{unknown25};
+}
+
+sub unknown26 {
+    my ($self) = @_;
+    return $self->{unknown26};
+}
+
+sub unknown27 {
+    my ($self) = @_;
+    return $self->{unknown27};
+}
+
+sub unknown28 {
+    my ($self) = @_;
+    return $self->{unknown28};
+}
+
+sub unknown29 {
+    my ($self) = @_;
+    return $self->{unknown29};
+}
+
+sub blip {
+    my ($self) = @_;
+    return $self->{blip};
 }
 
 ########################################################################

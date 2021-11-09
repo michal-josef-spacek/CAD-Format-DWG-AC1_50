@@ -362,8 +362,94 @@ types:
       - id: dim_text_vertical_position
         type: s1
         doc: 0x01f9, $DIMTAD
-      - id: ufo
-        size: 235
+      - id: limits_check
+        enum: limits_check
+        type: s2
+        doc: 0x01fa-0x01fb, $LIMCHECK
+        if: version_micro == 83
+      - id: unknown10
+        size: 45
+        if: version_micro == 83
+      - id: elevation
+        type: f8
+        doc: $ELEVATION
+        if: version_micro == 83
+      - id: thickness
+        type: f8
+        doc: $THICKNESS
+        if: version_micro == 83
+      - id: view_point_x
+        type: f8
+        doc: 0x0239-0x0241, $VIEWDIR/10
+        if: version_micro == 83
+      - id: view_point_y
+        type: f8
+        doc: 0x0242-0x0249, $VIEWDIR/20
+        if: version_micro == 83
+      - id: view_point_z
+        type: f8
+        doc: 0x024a-0x0251, $VIEWDIR/30
+        if: version_micro == 83
+      - id: unknown11
+        type: f8
+        if: version_micro == 83
+      - id: unknown12
+        type: f8
+        if: version_micro == 83
+      - id: unknown13
+        type: f8
+        if: version_micro == 83
+      - id: unknown14
+        type: f8
+        if: version_micro == 83
+      - id: unknown15
+        type: f8
+        if: version_micro == 83
+      - id: unknown16
+        type: f8
+        if: version_micro == 83
+      - id: unknown17
+        type: f8
+        if: version_micro == 83
+      - id: unknown18
+        type: f8
+        if: version_micro == 83
+      - id: unknown19
+        type: f8
+        if: version_micro == 83
+      - id: unknown20
+        type: f8
+        if: version_micro == 83
+      - id: unknown21
+        type: f8
+        if: version_micro == 83
+      - id: unknown22
+        type: f8
+        if: version_micro == 83
+      - id: unknown23
+        type: f8
+        if: version_micro == 83
+      - id: unknown24
+        type: f8
+        if: version_micro == 83
+      - id: unknown25
+        type: f8
+        if: version_micro == 83
+      - id: unknown26
+        type: f8
+        if: version_micro == 83
+      - id: unknown27
+        type: f8
+        if: version_micro == 83
+      - id: unknown28
+        type: f8
+        if: version_micro == 83
+      - id: unknown29
+        type: s2
+        if: version_micro == 83
+      - id: blip
+        type: s2
+        doc: 0x02e3-0x02e4, $BLIPMODE
         if: version_micro == 83
   entity:
     seq:
