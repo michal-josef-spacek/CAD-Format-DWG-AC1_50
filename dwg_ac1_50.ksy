@@ -42,7 +42,7 @@ seq:
     repeat-expr: header.table_view_items
   - id: block_entities
     type: real_entities
-    size: header.blocks_size
+    size: header.blocks_size_b
 types:
   block:
     seq:
@@ -451,6 +451,11 @@ types:
         type: s2
         doc: 0x02e3-0x02e4, $BLIPMODE
         if: version_micro == 83
+    instances:
+      blocks_size_a:
+         value: (blocks_size & 0xff000000) >> 24
+      blocks_size_b:
+         value: (blocks_size & 0x00ffffff)
   entity:
     seq:
       - id: entity_type

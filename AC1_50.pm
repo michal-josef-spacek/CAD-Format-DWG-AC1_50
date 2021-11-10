@@ -143,7 +143,7 @@ sub _read {
     for (my $i = 0; $i < $n_views; $i++) {
         $self->{views}[$i] = CAD::Format::DWG::AC1_50::View->new($self->{_io}, $self, $self->{_root});
     }
-    $self->{_raw_block_entities} = $self->{_io}->read_bytes($self->header()->blocks_size());
+    $self->{_raw_block_entities} = $self->{_io}->read_bytes($self->header()->blocks_size_b());
     my $io__raw_block_entities = IO::KaitaiStruct::Stream->new($self->{_raw_block_entities});
     $self->{block_entities} = CAD::Format::DWG::AC1_50::RealEntities->new($io__raw_block_entities, $self, $self->{_root});
 }
@@ -2776,6 +2776,20 @@ sub _read {
     if ($self->version_micro() == 83) {
         $self->{blip} = $self->{_io}->read_s2le();
     }
+}
+
+sub blocks_size_a {
+    my ($self) = @_;
+    return $self->{blocks_size_a} if ($self->{blocks_size_a});
+    $self->{blocks_size_a} = (($self->blocks_size() & 4278190080) >> 24);
+    return $self->{blocks_size_a};
+}
+
+sub blocks_size_b {
+    my ($self) = @_;
+    return $self->{blocks_size_b} if ($self->{blocks_size_b});
+    $self->{blocks_size_b} = ($self->blocks_size() & 16777215);
+    return $self->{blocks_size_b};
 }
 
 sub magic {
