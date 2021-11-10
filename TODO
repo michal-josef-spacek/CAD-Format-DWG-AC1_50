@@ -2,7 +2,9 @@ TODO
 ====
 1. Update methods in doc
 2. Is there a method how to create dwg files?
-5.
+5. style_generation to generation_flags
+6. entity_text flags to generation_flags
+7.
 
 Applied
 =======
