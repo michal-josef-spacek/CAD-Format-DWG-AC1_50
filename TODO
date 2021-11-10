@@ -2,7 +2,6 @@ TODO
 ====
 1. Update methods in doc
 2. Is there a method how to create dwg files?
-6. entity_text flags to generation_flags
 7.
 
 Applied
@@ -14,4 +13,7 @@ OK [20211106] skim
 OK [20211106] skim
 
 5. style_generation to generation_flags
+OK [20211110] skim
+
+6. entity_text flags to generation_flags
 OK [20211110] skim
