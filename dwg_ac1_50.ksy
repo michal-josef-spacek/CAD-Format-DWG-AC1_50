@@ -974,8 +974,8 @@ types:
         doc: TEXT/7
       - id: generation
         type: generation_flags
-        doc: TEXT/71
         if: entity_common.flag2_4
+        doc: TEXT/71
       - id: type
         enum: text_type
         type: u1
