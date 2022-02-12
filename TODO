@@ -2,7 +2,8 @@ TODO
 ====
 1. Update methods in doc
 2. Is there a method how to create dwg files?
-7.
+8. Rename text_style() to text_style_index()?
+9.
 
 Applied
 =======
@@ -17,3 +18,6 @@ OK [20211110] skim
 
 6. entity_text flags to generation_flags
 OK [20211110] skim
+
+7. Rename current_layer() to current_layer_index()?
+OK [20220213] skim
