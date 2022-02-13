@@ -1,6 +1,5 @@
 TODO
 ====
-1. Update methods in doc
 2. Is there a method how to create dwg files?
 9.
 
@@ -22,4 +21,7 @@ OK [20211110] skim
 OK [20220213] skim
 
 8. Rename text_style() to text_style_index()?
+OK [20220213] skim
+
+1. Update methods in doc
 OK [20220213] skim
