@@ -52,7 +52,7 @@ types:
         size: 31
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
       - id: u1
         type: s1
       - id: u2
@@ -1114,7 +1114,7 @@ types:
         size: 31
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
         doc: LTYPE/2
       - id: u3
         type: u1
@@ -1122,7 +1122,7 @@ types:
         size: 44
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
         doc: LTYPE/3
       - id: u5
         size: 4
@@ -1237,7 +1237,7 @@ types:
         size: 31
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
       - id: u2
         type: u1
       - id: view_size
