@@ -1259,7 +1259,7 @@ types:
         type: str
         encoding: ASCII
         terminator: 0x00
-      - id: u2
+      - id: u1
         type: u1
       - id: view_size
         type: f8
@@ -1273,19 +1273,23 @@ types:
       - id: view_width
         type: f8
         doc: VIEW/41
-      - id: u7
+      - id: u2
         type: u1
         if: _root.header.version_micro == 74
+        doc: TODO Right place in sequence?
+      - id: view_dir_x
+        type: f8
+        if: _root.header.version_micro == 83
+        doc: VIEW/11
+      - id: view_dir_y
+        type: f8
+        if: _root.header.version_micro == 83
+        doc: VIEW/21
+      - id: view_dir_z
+        type: f8
+        if: _root.header.version_micro == 83
+        doc: VIEW/31
       - id: u3
-        type: f8
-        if: _root.header.version_micro == 83
-      - id: u4
-        type: f8
-        if: _root.header.version_micro == 83
-      - id: u5
-        type: f8
-        if: _root.header.version_micro == 83
-      - id: u6
         type: u2
         if: _root.header.version_micro == 83
   view_flag:

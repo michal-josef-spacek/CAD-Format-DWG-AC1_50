@@ -4195,25 +4195,25 @@ sub _read {
 
     $self->{flag} = CAD::Format::DWG::AC1_50::ViewFlag->new($self->{_io}, $self, $self->{_root});
     $self->{view_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(31), 0, 0));
-    $self->{u2} = $self->{_io}->read_u1();
+    $self->{u1} = $self->{_io}->read_u1();
     $self->{view_size} = $self->{_io}->read_f8le();
     $self->{center_point_x} = $self->{_io}->read_f8le();
     $self->{center_point_y} = $self->{_io}->read_f8le();
     $self->{view_width} = $self->{_io}->read_f8le();
     if ($self->_root()->header()->version_micro() == 74) {
-        $self->{u7} = $self->{_io}->read_u1();
+        $self->{u2} = $self->{_io}->read_u1();
     }
     if ($self->_root()->header()->version_micro() == 83) {
-        $self->{u3} = $self->{_io}->read_f8le();
+        $self->{view_dir_x} = $self->{_io}->read_f8le();
     }
     if ($self->_root()->header()->version_micro() == 83) {
-        $self->{u4} = $self->{_io}->read_f8le();
+        $self->{view_dir_y} = $self->{_io}->read_f8le();
     }
     if ($self->_root()->header()->version_micro() == 83) {
-        $self->{u5} = $self->{_io}->read_f8le();
+        $self->{view_dir_z} = $self->{_io}->read_f8le();
     }
     if ($self->_root()->header()->version_micro() == 83) {
-        $self->{u6} = $self->{_io}->read_u2le();
+        $self->{u3} = $self->{_io}->read_u2le();
     }
 }
 
@@ -4227,9 +4227,9 @@ sub view_name {
     return $self->{view_name};
 }
 
-sub u2 {
+sub u1 {
     my ($self) = @_;
-    return $self->{u2};
+    return $self->{u1};
 }
 
 sub view_size {
@@ -4252,29 +4252,29 @@ sub view_width {
     return $self->{view_width};
 }
 
-sub u7 {
+sub u2 {
     my ($self) = @_;
-    return $self->{u7};
+    return $self->{u2};
+}
+
+sub view_dir_x {
+    my ($self) = @_;
+    return $self->{view_dir_x};
+}
+
+sub view_dir_y {
+    my ($self) = @_;
+    return $self->{view_dir_y};
+}
+
+sub view_dir_z {
+    my ($self) = @_;
+    return $self->{view_dir_z};
 }
 
 sub u3 {
     my ($self) = @_;
     return $self->{u3};
-}
-
-sub u4 {
-    my ($self) = @_;
-    return $self->{u4};
-}
-
-sub u5 {
-    my ($self) = @_;
-    return $self->{u5};
-}
-
-sub u6 {
-    my ($self) = @_;
-    return $self->{u6};
 }
 
 1;
