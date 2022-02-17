@@ -1418,6 +1418,56 @@ sub load {
 }
 
 ########################################################################
+package CAD::Format::DWG::AC1_50::Point3d;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{x} = $self->{_io}->read_f8le();
+    $self->{y} = $self->{_io}->read_f8le();
+    $self->{z} = $self->{_io}->read_f8le();
+}
+
+sub x {
+    my ($self) = @_;
+    return $self->{x};
+}
+
+sub y {
+    my ($self) = @_;
+    return $self->{y};
+}
+
+sub z {
+    my ($self) = @_;
+    return $self->{z};
+}
+
+########################################################################
 package CAD::Format::DWG::AC1_50::EntityBlockEnd;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -1453,6 +1503,50 @@ sub _read {
 sub entity_common {
     my ($self) = @_;
     return $self->{entity_common};
+}
+
+########################################################################
+package CAD::Format::DWG::AC1_50::Point2d;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{x} = $self->{_io}->read_f8le();
+    $self->{y} = $self->{_io}->read_f8le();
+}
+
+sub x {
+    my ($self) = @_;
+    return $self->{x};
+}
+
+sub y {
+    my ($self) = @_;
+    return $self->{y};
 }
 
 ########################################################################
@@ -2542,6 +2636,598 @@ sub rotation_in_radians {
 }
 
 ########################################################################
+package CAD::Format::DWG::AC1_50::HeaderVariables;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{insertion_base} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
+    $self->{number_of_entities} = $self->{_io}->read_u2le();
+    $self->{drawing_first} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
+    $self->{drawing_second} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
+    $self->{limits_min} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{limits_max} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{view_ctrl} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
+    $self->{view_size} = $self->{_io}->read_f8le();
+    $self->{snap} = $self->{_io}->read_s2le();
+    $self->{snap_resolution} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{snap_base} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{snap_angle} = $self->{_io}->read_f8le();
+    $self->{snap_style} = $self->{_io}->read_s2le();
+    $self->{snap_iso_pair} = $self->{_io}->read_s2le();
+    $self->{grid} = $self->{_io}->read_s2le();
+    $self->{grid_unit} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{ortho} = $self->{_io}->read_s2le();
+    $self->{regen} = $self->{_io}->read_s2le();
+    $self->{fill} = $self->{_io}->read_s2le();
+    $self->{qtext} = $self->{_io}->read_s2le();
+    $self->{drag} = $self->{_io}->read_s2le();
+    $self->{linetype_scale} = $self->{_io}->read_f8le();
+    $self->{text_size} = $self->{_io}->read_f8le();
+    $self->{trace_width} = $self->{_io}->read_f8le();
+    $self->{current_layer_index} = $self->{_io}->read_s2le();
+    $self->{unknown5} = $self->{_io}->read_s2le();
+    $self->{unknown6} = $self->{_io}->read_f8le();
+    $self->{unknown7a} = $self->{_io}->read_s2le();
+    $self->{unknown7b} = $self->{_io}->read_s2le();
+    $self->{unknown7c} = $self->{_io}->read_s2le();
+    $self->{unknown8} = $self->{_io}->read_f8le();
+    $self->{linear_units_format} = $self->{_io}->read_s2le();
+    $self->{linear_units_precision} = $self->{_io}->read_s2le();
+    $self->{axis} = $self->{_io}->read_s2le();
+    $self->{axis_value} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{sketch_increment} = $self->{_io}->read_f8le();
+    $self->{fillet_radius} = $self->{_io}->read_f8le();
+    $self->{units_for_angles} = $self->{_io}->read_s2le();
+    $self->{angular_precision} = $self->{_io}->read_s2le();
+    $self->{text_style_index} = $self->{_io}->read_s2le();
+    $self->{osnap} = $self->{_io}->read_s2le();
+    $self->{attributes} = $self->{_io}->read_s2le();
+    $self->{menu} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(15), 0, 0));
+    $self->{dim_scale} = $self->{_io}->read_f8le();
+    $self->{dim_arrowhead_size} = $self->{_io}->read_f8le();
+    $self->{dim_extension_line_offset} = $self->{_io}->read_f8le();
+    $self->{dim_baseline_spacing} = $self->{_io}->read_f8le();
+    $self->{dim_extension_line_extend} = $self->{_io}->read_f8le();
+    $self->{dim_maximum_tolerance_limit} = $self->{_io}->read_f8le();
+    $self->{dim_minimum_tolerance_limit} = $self->{_io}->read_f8le();
+    $self->{dim_text_height} = $self->{_io}->read_f8le();
+    $self->{dim_center_mark_control} = $self->{_io}->read_f8le();
+    $self->{dim_oblique_stroke_size} = $self->{_io}->read_f8le();
+    $self->{dim_tolerances} = $self->{_io}->read_s1();
+    $self->{dim_limits_default_text} = $self->{_io}->read_s1();
+    $self->{dim_text_ext_inside_line_position} = $self->{_io}->read_s1();
+    $self->{dim_text_ext_outside_line_position} = $self->{_io}->read_s1();
+    $self->{dim_extension_line_first_suppress} = $self->{_io}->read_s1();
+    $self->{dim_extension_line_second_suppress} = $self->{_io}->read_s1();
+    $self->{dim_text_vertical_position} = $self->{_io}->read_s1();
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{limits_check} = $self->{_io}->read_s2le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown10} = $self->{_io}->read_bytes(45);
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{elevation} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{thickness} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{view_point} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown11} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown12} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown13} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown14} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown15} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown16} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown17} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown18} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown19} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown20} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown21} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown22} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown23} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown24} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown25} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown26} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown27} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown28} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{unknown29} = $self->{_io}->read_s2le();
+    }
+    if ($self->_root()->header()->version_micro() == 83) {
+        $self->{blip} = $self->{_io}->read_s2le();
+    }
+}
+
+sub insertion_base {
+    my ($self) = @_;
+    return $self->{insertion_base};
+}
+
+sub number_of_entities {
+    my ($self) = @_;
+    return $self->{number_of_entities};
+}
+
+sub drawing_first {
+    my ($self) = @_;
+    return $self->{drawing_first};
+}
+
+sub drawing_second {
+    my ($self) = @_;
+    return $self->{drawing_second};
+}
+
+sub limits_min {
+    my ($self) = @_;
+    return $self->{limits_min};
+}
+
+sub limits_max {
+    my ($self) = @_;
+    return $self->{limits_max};
+}
+
+sub view_ctrl {
+    my ($self) = @_;
+    return $self->{view_ctrl};
+}
+
+sub view_size {
+    my ($self) = @_;
+    return $self->{view_size};
+}
+
+sub snap {
+    my ($self) = @_;
+    return $self->{snap};
+}
+
+sub snap_resolution {
+    my ($self) = @_;
+    return $self->{snap_resolution};
+}
+
+sub snap_base {
+    my ($self) = @_;
+    return $self->{snap_base};
+}
+
+sub snap_angle {
+    my ($self) = @_;
+    return $self->{snap_angle};
+}
+
+sub snap_style {
+    my ($self) = @_;
+    return $self->{snap_style};
+}
+
+sub snap_iso_pair {
+    my ($self) = @_;
+    return $self->{snap_iso_pair};
+}
+
+sub grid {
+    my ($self) = @_;
+    return $self->{grid};
+}
+
+sub grid_unit {
+    my ($self) = @_;
+    return $self->{grid_unit};
+}
+
+sub ortho {
+    my ($self) = @_;
+    return $self->{ortho};
+}
+
+sub regen {
+    my ($self) = @_;
+    return $self->{regen};
+}
+
+sub fill {
+    my ($self) = @_;
+    return $self->{fill};
+}
+
+sub qtext {
+    my ($self) = @_;
+    return $self->{qtext};
+}
+
+sub drag {
+    my ($self) = @_;
+    return $self->{drag};
+}
+
+sub linetype_scale {
+    my ($self) = @_;
+    return $self->{linetype_scale};
+}
+
+sub text_size {
+    my ($self) = @_;
+    return $self->{text_size};
+}
+
+sub trace_width {
+    my ($self) = @_;
+    return $self->{trace_width};
+}
+
+sub current_layer_index {
+    my ($self) = @_;
+    return $self->{current_layer_index};
+}
+
+sub unknown5 {
+    my ($self) = @_;
+    return $self->{unknown5};
+}
+
+sub unknown6 {
+    my ($self) = @_;
+    return $self->{unknown6};
+}
+
+sub unknown7a {
+    my ($self) = @_;
+    return $self->{unknown7a};
+}
+
+sub unknown7b {
+    my ($self) = @_;
+    return $self->{unknown7b};
+}
+
+sub unknown7c {
+    my ($self) = @_;
+    return $self->{unknown7c};
+}
+
+sub unknown8 {
+    my ($self) = @_;
+    return $self->{unknown8};
+}
+
+sub linear_units_format {
+    my ($self) = @_;
+    return $self->{linear_units_format};
+}
+
+sub linear_units_precision {
+    my ($self) = @_;
+    return $self->{linear_units_precision};
+}
+
+sub axis {
+    my ($self) = @_;
+    return $self->{axis};
+}
+
+sub axis_value {
+    my ($self) = @_;
+    return $self->{axis_value};
+}
+
+sub sketch_increment {
+    my ($self) = @_;
+    return $self->{sketch_increment};
+}
+
+sub fillet_radius {
+    my ($self) = @_;
+    return $self->{fillet_radius};
+}
+
+sub units_for_angles {
+    my ($self) = @_;
+    return $self->{units_for_angles};
+}
+
+sub angular_precision {
+    my ($self) = @_;
+    return $self->{angular_precision};
+}
+
+sub text_style_index {
+    my ($self) = @_;
+    return $self->{text_style_index};
+}
+
+sub osnap {
+    my ($self) = @_;
+    return $self->{osnap};
+}
+
+sub attributes {
+    my ($self) = @_;
+    return $self->{attributes};
+}
+
+sub menu {
+    my ($self) = @_;
+    return $self->{menu};
+}
+
+sub dim_scale {
+    my ($self) = @_;
+    return $self->{dim_scale};
+}
+
+sub dim_arrowhead_size {
+    my ($self) = @_;
+    return $self->{dim_arrowhead_size};
+}
+
+sub dim_extension_line_offset {
+    my ($self) = @_;
+    return $self->{dim_extension_line_offset};
+}
+
+sub dim_baseline_spacing {
+    my ($self) = @_;
+    return $self->{dim_baseline_spacing};
+}
+
+sub dim_extension_line_extend {
+    my ($self) = @_;
+    return $self->{dim_extension_line_extend};
+}
+
+sub dim_maximum_tolerance_limit {
+    my ($self) = @_;
+    return $self->{dim_maximum_tolerance_limit};
+}
+
+sub dim_minimum_tolerance_limit {
+    my ($self) = @_;
+    return $self->{dim_minimum_tolerance_limit};
+}
+
+sub dim_text_height {
+    my ($self) = @_;
+    return $self->{dim_text_height};
+}
+
+sub dim_center_mark_control {
+    my ($self) = @_;
+    return $self->{dim_center_mark_control};
+}
+
+sub dim_oblique_stroke_size {
+    my ($self) = @_;
+    return $self->{dim_oblique_stroke_size};
+}
+
+sub dim_tolerances {
+    my ($self) = @_;
+    return $self->{dim_tolerances};
+}
+
+sub dim_limits_default_text {
+    my ($self) = @_;
+    return $self->{dim_limits_default_text};
+}
+
+sub dim_text_ext_inside_line_position {
+    my ($self) = @_;
+    return $self->{dim_text_ext_inside_line_position};
+}
+
+sub dim_text_ext_outside_line_position {
+    my ($self) = @_;
+    return $self->{dim_text_ext_outside_line_position};
+}
+
+sub dim_extension_line_first_suppress {
+    my ($self) = @_;
+    return $self->{dim_extension_line_first_suppress};
+}
+
+sub dim_extension_line_second_suppress {
+    my ($self) = @_;
+    return $self->{dim_extension_line_second_suppress};
+}
+
+sub dim_text_vertical_position {
+    my ($self) = @_;
+    return $self->{dim_text_vertical_position};
+}
+
+sub limits_check {
+    my ($self) = @_;
+    return $self->{limits_check};
+}
+
+sub unknown10 {
+    my ($self) = @_;
+    return $self->{unknown10};
+}
+
+sub elevation {
+    my ($self) = @_;
+    return $self->{elevation};
+}
+
+sub thickness {
+    my ($self) = @_;
+    return $self->{thickness};
+}
+
+sub view_point {
+    my ($self) = @_;
+    return $self->{view_point};
+}
+
+sub unknown11 {
+    my ($self) = @_;
+    return $self->{unknown11};
+}
+
+sub unknown12 {
+    my ($self) = @_;
+    return $self->{unknown12};
+}
+
+sub unknown13 {
+    my ($self) = @_;
+    return $self->{unknown13};
+}
+
+sub unknown14 {
+    my ($self) = @_;
+    return $self->{unknown14};
+}
+
+sub unknown15 {
+    my ($self) = @_;
+    return $self->{unknown15};
+}
+
+sub unknown16 {
+    my ($self) = @_;
+    return $self->{unknown16};
+}
+
+sub unknown17 {
+    my ($self) = @_;
+    return $self->{unknown17};
+}
+
+sub unknown18 {
+    my ($self) = @_;
+    return $self->{unknown18};
+}
+
+sub unknown19 {
+    my ($self) = @_;
+    return $self->{unknown19};
+}
+
+sub unknown20 {
+    my ($self) = @_;
+    return $self->{unknown20};
+}
+
+sub unknown21 {
+    my ($self) = @_;
+    return $self->{unknown21};
+}
+
+sub unknown22 {
+    my ($self) = @_;
+    return $self->{unknown22};
+}
+
+sub unknown23 {
+    my ($self) = @_;
+    return $self->{unknown23};
+}
+
+sub unknown24 {
+    my ($self) = @_;
+    return $self->{unknown24};
+}
+
+sub unknown25 {
+    my ($self) = @_;
+    return $self->{unknown25};
+}
+
+sub unknown26 {
+    my ($self) = @_;
+    return $self->{unknown26};
+}
+
+sub unknown27 {
+    my ($self) = @_;
+    return $self->{unknown27};
+}
+
+sub unknown28 {
+    my ($self) = @_;
+    return $self->{unknown28};
+}
+
+sub unknown29 {
+    my ($self) = @_;
+    return $self->{unknown29};
+}
+
+sub blip {
+    my ($self) = @_;
+    return $self->{blip};
+}
+
+########################################################################
 package CAD::Format::DWG::AC1_50::EntityArc;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -2830,161 +3516,7 @@ sub _read {
     $self->{table_view_items} = $self->{_io}->read_u2le();
     $self->{unknown4m} = $self->{_io}->read_bytes(2);
     $self->{table_view_begin} = $self->{_io}->read_u4le();
-    $self->{insertion_base_x} = $self->{_io}->read_f8le();
-    $self->{insertion_base_y} = $self->{_io}->read_f8le();
-    $self->{insertion_base_z} = $self->{_io}->read_f8le();
-    $self->{number_of_entities} = $self->{_io}->read_u2le();
-    $self->{drawing_first_x} = $self->{_io}->read_f8le();
-    $self->{drawing_first_y} = $self->{_io}->read_f8le();
-    $self->{drawing_first_z} = $self->{_io}->read_f8le();
-    $self->{drawing_second_x} = $self->{_io}->read_f8le();
-    $self->{drawing_second_y} = $self->{_io}->read_f8le();
-    $self->{drawing_second_z} = $self->{_io}->read_f8le();
-    $self->{limits_min_x} = $self->{_io}->read_f8le();
-    $self->{limits_min_y} = $self->{_io}->read_f8le();
-    $self->{limits_max_x} = $self->{_io}->read_f8le();
-    $self->{limits_max_y} = $self->{_io}->read_f8le();
-    $self->{view_ctrl_x} = $self->{_io}->read_f8le();
-    $self->{view_ctrl_y} = $self->{_io}->read_f8le();
-    $self->{view_ctrl_z} = $self->{_io}->read_f8le();
-    $self->{view_size} = $self->{_io}->read_f8le();
-    $self->{snap} = $self->{_io}->read_s2le();
-    $self->{snap_resolution_x} = $self->{_io}->read_f8le();
-    $self->{snap_resolution_y} = $self->{_io}->read_f8le();
-    $self->{snap_base_x} = $self->{_io}->read_f8le();
-    $self->{snap_base_y} = $self->{_io}->read_f8le();
-    $self->{snap_angle} = $self->{_io}->read_f8le();
-    $self->{snap_style} = $self->{_io}->read_s2le();
-    $self->{snap_iso_pair} = $self->{_io}->read_s2le();
-    $self->{grid} = $self->{_io}->read_s2le();
-    $self->{grid_unit_x} = $self->{_io}->read_f8le();
-    $self->{grid_unit_y} = $self->{_io}->read_f8le();
-    $self->{ortho} = $self->{_io}->read_s2le();
-    $self->{regen} = $self->{_io}->read_s2le();
-    $self->{fill} = $self->{_io}->read_s2le();
-    $self->{qtext} = $self->{_io}->read_s2le();
-    $self->{drag} = $self->{_io}->read_s2le();
-    $self->{linetype_scale} = $self->{_io}->read_f8le();
-    $self->{text_size} = $self->{_io}->read_f8le();
-    $self->{trace_width} = $self->{_io}->read_f8le();
-    $self->{current_layer_index} = $self->{_io}->read_s2le();
-    $self->{unknown5} = $self->{_io}->read_s2le();
-    $self->{unknown6} = $self->{_io}->read_f8le();
-    $self->{unknown7a} = $self->{_io}->read_s2le();
-    $self->{unknown7b} = $self->{_io}->read_s2le();
-    $self->{unknown7c} = $self->{_io}->read_s2le();
-    $self->{unknown8} = $self->{_io}->read_f8le();
-    $self->{linear_units_format} = $self->{_io}->read_s2le();
-    $self->{linear_units_precision} = $self->{_io}->read_s2le();
-    $self->{axis} = $self->{_io}->read_s2le();
-    $self->{axis_value_x} = $self->{_io}->read_f8le();
-    $self->{axis_value_y} = $self->{_io}->read_f8le();
-    $self->{sketch_increment} = $self->{_io}->read_f8le();
-    $self->{fillet_radius} = $self->{_io}->read_f8le();
-    $self->{units_for_angles} = $self->{_io}->read_s2le();
-    $self->{angular_precision} = $self->{_io}->read_s2le();
-    $self->{text_style_index} = $self->{_io}->read_s2le();
-    $self->{osnap} = $self->{_io}->read_s2le();
-    $self->{attributes} = $self->{_io}->read_s2le();
-    $self->{menu} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(15), 0, 0));
-    $self->{dim_scale} = $self->{_io}->read_f8le();
-    $self->{dim_arrowhead_size} = $self->{_io}->read_f8le();
-    $self->{dim_extension_line_offset} = $self->{_io}->read_f8le();
-    $self->{dim_baseline_spacing} = $self->{_io}->read_f8le();
-    $self->{dim_extension_line_extend} = $self->{_io}->read_f8le();
-    $self->{dim_maximum_tolerance_limit} = $self->{_io}->read_f8le();
-    $self->{dim_minimum_tolerance_limit} = $self->{_io}->read_f8le();
-    $self->{dim_text_height} = $self->{_io}->read_f8le();
-    $self->{dim_center_mark_control} = $self->{_io}->read_f8le();
-    $self->{dim_oblique_stroke_size} = $self->{_io}->read_f8le();
-    $self->{dim_tolerances} = $self->{_io}->read_s1();
-    $self->{dim_limits_default_text} = $self->{_io}->read_s1();
-    $self->{dim_text_ext_inside_line_position} = $self->{_io}->read_s1();
-    $self->{dim_text_ext_outside_line_position} = $self->{_io}->read_s1();
-    $self->{dim_extension_line_first_suppress} = $self->{_io}->read_s1();
-    $self->{dim_extension_line_second_suppress} = $self->{_io}->read_s1();
-    $self->{dim_text_vertical_position} = $self->{_io}->read_s1();
-    if ($self->version_micro() == 83) {
-        $self->{limits_check} = $self->{_io}->read_s2le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown10} = $self->{_io}->read_bytes(45);
-    }
-    if ($self->version_micro() == 83) {
-        $self->{elevation} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{thickness} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{view_point_x} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{view_point_y} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{view_point_z} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown11} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown12} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown13} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown14} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown15} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown16} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown17} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown18} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown19} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown20} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown21} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown22} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown23} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown24} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown25} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown26} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown27} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown28} = $self->{_io}->read_f8le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{unknown29} = $self->{_io}->read_s2le();
-    }
-    if ($self->version_micro() == 83) {
-        $self->{blip} = $self->{_io}->read_s2le();
-    }
+    $self->{variables} = CAD::Format::DWG::AC1_50::HeaderVariables->new($self->{_io}, $self, $self->{_root});
 }
 
 sub blocks_size_a {
@@ -3171,509 +3703,9 @@ sub table_view_begin {
     return $self->{table_view_begin};
 }
 
-sub insertion_base_x {
+sub variables {
     my ($self) = @_;
-    return $self->{insertion_base_x};
-}
-
-sub insertion_base_y {
-    my ($self) = @_;
-    return $self->{insertion_base_y};
-}
-
-sub insertion_base_z {
-    my ($self) = @_;
-    return $self->{insertion_base_z};
-}
-
-sub number_of_entities {
-    my ($self) = @_;
-    return $self->{number_of_entities};
-}
-
-sub drawing_first_x {
-    my ($self) = @_;
-    return $self->{drawing_first_x};
-}
-
-sub drawing_first_y {
-    my ($self) = @_;
-    return $self->{drawing_first_y};
-}
-
-sub drawing_first_z {
-    my ($self) = @_;
-    return $self->{drawing_first_z};
-}
-
-sub drawing_second_x {
-    my ($self) = @_;
-    return $self->{drawing_second_x};
-}
-
-sub drawing_second_y {
-    my ($self) = @_;
-    return $self->{drawing_second_y};
-}
-
-sub drawing_second_z {
-    my ($self) = @_;
-    return $self->{drawing_second_z};
-}
-
-sub limits_min_x {
-    my ($self) = @_;
-    return $self->{limits_min_x};
-}
-
-sub limits_min_y {
-    my ($self) = @_;
-    return $self->{limits_min_y};
-}
-
-sub limits_max_x {
-    my ($self) = @_;
-    return $self->{limits_max_x};
-}
-
-sub limits_max_y {
-    my ($self) = @_;
-    return $self->{limits_max_y};
-}
-
-sub view_ctrl_x {
-    my ($self) = @_;
-    return $self->{view_ctrl_x};
-}
-
-sub view_ctrl_y {
-    my ($self) = @_;
-    return $self->{view_ctrl_y};
-}
-
-sub view_ctrl_z {
-    my ($self) = @_;
-    return $self->{view_ctrl_z};
-}
-
-sub view_size {
-    my ($self) = @_;
-    return $self->{view_size};
-}
-
-sub snap {
-    my ($self) = @_;
-    return $self->{snap};
-}
-
-sub snap_resolution_x {
-    my ($self) = @_;
-    return $self->{snap_resolution_x};
-}
-
-sub snap_resolution_y {
-    my ($self) = @_;
-    return $self->{snap_resolution_y};
-}
-
-sub snap_base_x {
-    my ($self) = @_;
-    return $self->{snap_base_x};
-}
-
-sub snap_base_y {
-    my ($self) = @_;
-    return $self->{snap_base_y};
-}
-
-sub snap_angle {
-    my ($self) = @_;
-    return $self->{snap_angle};
-}
-
-sub snap_style {
-    my ($self) = @_;
-    return $self->{snap_style};
-}
-
-sub snap_iso_pair {
-    my ($self) = @_;
-    return $self->{snap_iso_pair};
-}
-
-sub grid {
-    my ($self) = @_;
-    return $self->{grid};
-}
-
-sub grid_unit_x {
-    my ($self) = @_;
-    return $self->{grid_unit_x};
-}
-
-sub grid_unit_y {
-    my ($self) = @_;
-    return $self->{grid_unit_y};
-}
-
-sub ortho {
-    my ($self) = @_;
-    return $self->{ortho};
-}
-
-sub regen {
-    my ($self) = @_;
-    return $self->{regen};
-}
-
-sub fill {
-    my ($self) = @_;
-    return $self->{fill};
-}
-
-sub qtext {
-    my ($self) = @_;
-    return $self->{qtext};
-}
-
-sub drag {
-    my ($self) = @_;
-    return $self->{drag};
-}
-
-sub linetype_scale {
-    my ($self) = @_;
-    return $self->{linetype_scale};
-}
-
-sub text_size {
-    my ($self) = @_;
-    return $self->{text_size};
-}
-
-sub trace_width {
-    my ($self) = @_;
-    return $self->{trace_width};
-}
-
-sub current_layer_index {
-    my ($self) = @_;
-    return $self->{current_layer_index};
-}
-
-sub unknown5 {
-    my ($self) = @_;
-    return $self->{unknown5};
-}
-
-sub unknown6 {
-    my ($self) = @_;
-    return $self->{unknown6};
-}
-
-sub unknown7a {
-    my ($self) = @_;
-    return $self->{unknown7a};
-}
-
-sub unknown7b {
-    my ($self) = @_;
-    return $self->{unknown7b};
-}
-
-sub unknown7c {
-    my ($self) = @_;
-    return $self->{unknown7c};
-}
-
-sub unknown8 {
-    my ($self) = @_;
-    return $self->{unknown8};
-}
-
-sub linear_units_format {
-    my ($self) = @_;
-    return $self->{linear_units_format};
-}
-
-sub linear_units_precision {
-    my ($self) = @_;
-    return $self->{linear_units_precision};
-}
-
-sub axis {
-    my ($self) = @_;
-    return $self->{axis};
-}
-
-sub axis_value_x {
-    my ($self) = @_;
-    return $self->{axis_value_x};
-}
-
-sub axis_value_y {
-    my ($self) = @_;
-    return $self->{axis_value_y};
-}
-
-sub sketch_increment {
-    my ($self) = @_;
-    return $self->{sketch_increment};
-}
-
-sub fillet_radius {
-    my ($self) = @_;
-    return $self->{fillet_radius};
-}
-
-sub units_for_angles {
-    my ($self) = @_;
-    return $self->{units_for_angles};
-}
-
-sub angular_precision {
-    my ($self) = @_;
-    return $self->{angular_precision};
-}
-
-sub text_style_index {
-    my ($self) = @_;
-    return $self->{text_style_index};
-}
-
-sub osnap {
-    my ($self) = @_;
-    return $self->{osnap};
-}
-
-sub attributes {
-    my ($self) = @_;
-    return $self->{attributes};
-}
-
-sub menu {
-    my ($self) = @_;
-    return $self->{menu};
-}
-
-sub dim_scale {
-    my ($self) = @_;
-    return $self->{dim_scale};
-}
-
-sub dim_arrowhead_size {
-    my ($self) = @_;
-    return $self->{dim_arrowhead_size};
-}
-
-sub dim_extension_line_offset {
-    my ($self) = @_;
-    return $self->{dim_extension_line_offset};
-}
-
-sub dim_baseline_spacing {
-    my ($self) = @_;
-    return $self->{dim_baseline_spacing};
-}
-
-sub dim_extension_line_extend {
-    my ($self) = @_;
-    return $self->{dim_extension_line_extend};
-}
-
-sub dim_maximum_tolerance_limit {
-    my ($self) = @_;
-    return $self->{dim_maximum_tolerance_limit};
-}
-
-sub dim_minimum_tolerance_limit {
-    my ($self) = @_;
-    return $self->{dim_minimum_tolerance_limit};
-}
-
-sub dim_text_height {
-    my ($self) = @_;
-    return $self->{dim_text_height};
-}
-
-sub dim_center_mark_control {
-    my ($self) = @_;
-    return $self->{dim_center_mark_control};
-}
-
-sub dim_oblique_stroke_size {
-    my ($self) = @_;
-    return $self->{dim_oblique_stroke_size};
-}
-
-sub dim_tolerances {
-    my ($self) = @_;
-    return $self->{dim_tolerances};
-}
-
-sub dim_limits_default_text {
-    my ($self) = @_;
-    return $self->{dim_limits_default_text};
-}
-
-sub dim_text_ext_inside_line_position {
-    my ($self) = @_;
-    return $self->{dim_text_ext_inside_line_position};
-}
-
-sub dim_text_ext_outside_line_position {
-    my ($self) = @_;
-    return $self->{dim_text_ext_outside_line_position};
-}
-
-sub dim_extension_line_first_suppress {
-    my ($self) = @_;
-    return $self->{dim_extension_line_first_suppress};
-}
-
-sub dim_extension_line_second_suppress {
-    my ($self) = @_;
-    return $self->{dim_extension_line_second_suppress};
-}
-
-sub dim_text_vertical_position {
-    my ($self) = @_;
-    return $self->{dim_text_vertical_position};
-}
-
-sub limits_check {
-    my ($self) = @_;
-    return $self->{limits_check};
-}
-
-sub unknown10 {
-    my ($self) = @_;
-    return $self->{unknown10};
-}
-
-sub elevation {
-    my ($self) = @_;
-    return $self->{elevation};
-}
-
-sub thickness {
-    my ($self) = @_;
-    return $self->{thickness};
-}
-
-sub view_point_x {
-    my ($self) = @_;
-    return $self->{view_point_x};
-}
-
-sub view_point_y {
-    my ($self) = @_;
-    return $self->{view_point_y};
-}
-
-sub view_point_z {
-    my ($self) = @_;
-    return $self->{view_point_z};
-}
-
-sub unknown11 {
-    my ($self) = @_;
-    return $self->{unknown11};
-}
-
-sub unknown12 {
-    my ($self) = @_;
-    return $self->{unknown12};
-}
-
-sub unknown13 {
-    my ($self) = @_;
-    return $self->{unknown13};
-}
-
-sub unknown14 {
-    my ($self) = @_;
-    return $self->{unknown14};
-}
-
-sub unknown15 {
-    my ($self) = @_;
-    return $self->{unknown15};
-}
-
-sub unknown16 {
-    my ($self) = @_;
-    return $self->{unknown16};
-}
-
-sub unknown17 {
-    my ($self) = @_;
-    return $self->{unknown17};
-}
-
-sub unknown18 {
-    my ($self) = @_;
-    return $self->{unknown18};
-}
-
-sub unknown19 {
-    my ($self) = @_;
-    return $self->{unknown19};
-}
-
-sub unknown20 {
-    my ($self) = @_;
-    return $self->{unknown20};
-}
-
-sub unknown21 {
-    my ($self) = @_;
-    return $self->{unknown21};
-}
-
-sub unknown22 {
-    my ($self) = @_;
-    return $self->{unknown22};
-}
-
-sub unknown23 {
-    my ($self) = @_;
-    return $self->{unknown23};
-}
-
-sub unknown24 {
-    my ($self) = @_;
-    return $self->{unknown24};
-}
-
-sub unknown25 {
-    my ($self) = @_;
-    return $self->{unknown25};
-}
-
-sub unknown26 {
-    my ($self) = @_;
-    return $self->{unknown26};
-}
-
-sub unknown27 {
-    my ($self) = @_;
-    return $self->{unknown27};
-}
-
-sub unknown28 {
-    my ($self) = @_;
-    return $self->{unknown28};
-}
-
-sub unknown29 {
-    my ($self) = @_;
-    return $self->{unknown29};
-}
-
-sub blip {
-    my ($self) = @_;
-    return $self->{blip};
+    return $self->{variables};
 }
 
 ########################################################################
