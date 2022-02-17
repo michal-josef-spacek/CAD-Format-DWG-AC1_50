@@ -355,6 +355,86 @@ sub u8 {
 }
 
 ########################################################################
+package CAD::Format::DWG::AC1_50::LinetypeFlag;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{flag1} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag2} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag3} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag4} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag5} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag6} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag7} = $self->{_io}->read_bits_int_be(1);
+    $self->{frozen} = $self->{_io}->read_bits_int_be(1);
+}
+
+sub flag1 {
+    my ($self) = @_;
+    return $self->{flag1};
+}
+
+sub flag2 {
+    my ($self) = @_;
+    return $self->{flag2};
+}
+
+sub flag3 {
+    my ($self) = @_;
+    return $self->{flag3};
+}
+
+sub flag4 {
+    my ($self) = @_;
+    return $self->{flag4};
+}
+
+sub flag5 {
+    my ($self) = @_;
+    return $self->{flag5};
+}
+
+sub flag6 {
+    my ($self) = @_;
+    return $self->{flag6};
+}
+
+sub flag7 {
+    my ($self) = @_;
+    return $self->{flag7};
+}
+
+sub frozen {
+    my ($self) = @_;
+    return $self->{frozen};
+}
+
+########################################################################
 package CAD::Format::DWG::AC1_50::EntityTmp;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -560,6 +640,110 @@ sub y2 {
 sub z2 {
     my ($self) = @_;
     return $self->{z2};
+}
+
+########################################################################
+package CAD::Format::DWG::AC1_50::Pattern;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{pattern1} = $self->{_io}->read_f8le();
+    $self->{pattern2} = $self->{_io}->read_f8le();
+    $self->{pattern3} = $self->{_io}->read_f8le();
+    $self->{pattern4} = $self->{_io}->read_f8le();
+    $self->{pattern5} = $self->{_io}->read_f8le();
+    $self->{pattern6} = $self->{_io}->read_f8le();
+    $self->{pattern7} = $self->{_io}->read_f8le();
+    $self->{pattern8} = $self->{_io}->read_f8le();
+    $self->{pattern9} = $self->{_io}->read_f8le();
+    $self->{pattern10} = $self->{_io}->read_f8le();
+    $self->{pattern11} = $self->{_io}->read_f8le();
+    $self->{pattern12} = $self->{_io}->read_f8le();
+}
+
+sub pattern1 {
+    my ($self) = @_;
+    return $self->{pattern1};
+}
+
+sub pattern2 {
+    my ($self) = @_;
+    return $self->{pattern2};
+}
+
+sub pattern3 {
+    my ($self) = @_;
+    return $self->{pattern3};
+}
+
+sub pattern4 {
+    my ($self) = @_;
+    return $self->{pattern4};
+}
+
+sub pattern5 {
+    my ($self) = @_;
+    return $self->{pattern5};
+}
+
+sub pattern6 {
+    my ($self) = @_;
+    return $self->{pattern6};
+}
+
+sub pattern7 {
+    my ($self) = @_;
+    return $self->{pattern7};
+}
+
+sub pattern8 {
+    my ($self) = @_;
+    return $self->{pattern8};
+}
+
+sub pattern9 {
+    my ($self) = @_;
+    return $self->{pattern9};
+}
+
+sub pattern10 {
+    my ($self) = @_;
+    return $self->{pattern10};
+}
+
+sub pattern11 {
+    my ($self) = @_;
+    return $self->{pattern11};
+}
+
+sub pattern12 {
+    my ($self) = @_;
+    return $self->{pattern12};
 }
 
 ########################################################################
@@ -1101,34 +1285,21 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{u2} = $self->{_io}->read_u1();
-    $self->{linetype_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(31), 0, 0));
-    $self->{u3} = $self->{_io}->read_u1();
-    $self->{description} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(44), 0, 0));
-    $self->{u5} = $self->{_io}->read_bytes(4);
+    $self->{flag} = CAD::Format::DWG::AC1_50::LinetypeFlag->new($self->{_io}, $self, $self->{_root});
+    $self->{linetype_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
+    $self->{description} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(48), 0, 0));
     $self->{alignment} = $self->{_io}->read_u1();
     $self->{num_dashes} = $self->{_io}->read_u1();
     $self->{pattern_len} = $self->{_io}->read_f8le();
-    $self->{u9} = $self->{_io}->read_f8le();
-    $self->{u10} = $self->{_io}->read_f8le();
-    $self->{u11} = $self->{_io}->read_f8le();
-    $self->{u12} = $self->{_io}->read_f8le();
-    $self->{u13} = $self->{_io}->read_f8le();
-    $self->{u14} = $self->{_io}->read_f8le();
-    $self->{u15} = $self->{_io}->read_f8le();
-    $self->{u16} = $self->{_io}->read_f8le();
-    $self->{u17} = $self->{_io}->read_f8le();
-    $self->{u18} = $self->{_io}->read_f8le();
-    $self->{u19} = $self->{_io}->read_f8le();
-    $self->{u20} = $self->{_io}->read_f8le();
+    $self->{pattern} = CAD::Format::DWG::AC1_50::Pattern->new($self->{_io}, $self, $self->{_root});
     if ($self->_root()->header()->version_micro() == 74) {
         $self->{unknown1} = $self->{_io}->read_s1();
     }
 }
 
-sub u2 {
+sub flag {
     my ($self) = @_;
-    return $self->{u2};
+    return $self->{flag};
 }
 
 sub linetype_name {
@@ -1136,19 +1307,9 @@ sub linetype_name {
     return $self->{linetype_name};
 }
 
-sub u3 {
-    my ($self) = @_;
-    return $self->{u3};
-}
-
 sub description {
     my ($self) = @_;
     return $self->{description};
-}
-
-sub u5 {
-    my ($self) = @_;
-    return $self->{u5};
 }
 
 sub alignment {
@@ -1166,64 +1327,9 @@ sub pattern_len {
     return $self->{pattern_len};
 }
 
-sub u9 {
+sub pattern {
     my ($self) = @_;
-    return $self->{u9};
-}
-
-sub u10 {
-    my ($self) = @_;
-    return $self->{u10};
-}
-
-sub u11 {
-    my ($self) = @_;
-    return $self->{u11};
-}
-
-sub u12 {
-    my ($self) = @_;
-    return $self->{u12};
-}
-
-sub u13 {
-    my ($self) = @_;
-    return $self->{u13};
-}
-
-sub u14 {
-    my ($self) = @_;
-    return $self->{u14};
-}
-
-sub u15 {
-    my ($self) = @_;
-    return $self->{u15};
-}
-
-sub u16 {
-    my ($self) = @_;
-    return $self->{u16};
-}
-
-sub u17 {
-    my ($self) = @_;
-    return $self->{u17};
-}
-
-sub u18 {
-    my ($self) = @_;
-    return $self->{u18};
-}
-
-sub u19 {
-    my ($self) = @_;
-    return $self->{u19};
-}
-
-sub u20 {
-    my ($self) = @_;
-    return $self->{u20};
+    return $self->{pattern};
 }
 
 sub unknown1 {

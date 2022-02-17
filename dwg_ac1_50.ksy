@@ -1127,25 +1127,21 @@ types:
         type: b1
   linetype:
     seq:
-      - id: u2
-        type: u1
+      - id: flag
+        type: linetype_flag
         doc: LTYPE/70
       - id: linetype_name
-        size: 31
+        size: 32
         type: str
         encoding: ASCII
         terminator: 0x00
         doc: LTYPE/2
-      - id: u3
-        type: u1
       - id: description
-        size: 44
+        size: 48
         type: str
         encoding: ASCII
         terminator: 0x00
         doc: LTYPE/3
-      - id: u5
-        size: 4
       - id: alignment
         type: u1
         doc: LTYPE/72
@@ -1155,45 +1151,56 @@ types:
       - id: pattern_len
         type: f8
         doc: LTYPE/40
-      - id: u9
-        type: f8
-        doc: LTYPE/49
-      - id: u10
-        type: f8
-        doc: LTYPE/49
-      - id: u11
-        type: f8
-        doc: LTYPE/49
-      - id: u12
-        type: f8
-        doc: LTYPE/49
-      - id: u13
-        type: f8
-        doc: LTYPE/49
-      - id: u14
-        type: f8
-        doc: LTYPE/49
-      - id: u15
-        type: f8
-        doc: LTYPE/49
-      - id: u16
-        type: f8
-        doc: LTYPE/49
-      - id: u17
-        type: f8
-        doc: LTYPE/49
-      - id: u18
-        type: f8
-        doc: LTYPE/49
-      - id: u19
-        type: f8
-        doc: LTYPE/49
-      - id: u20
-        type: f8
+      - id: pattern
+        type: pattern
         doc: LTYPE/49
       - id: unknown1
         type: s1
         if: _root.header.version_micro == 74
+  pattern:
+    seq:
+      - id: pattern1
+        type: f8
+      - id: pattern2
+        type: f8
+      - id: pattern3
+        type: f8
+      - id: pattern4
+        type: f8
+      - id: pattern5
+        type: f8
+      - id: pattern6
+        type: f8
+      - id: pattern7
+        type: f8
+      - id: pattern8
+        type: f8
+      - id: pattern9
+        type: f8
+      - id: pattern10
+        type: f8
+      - id: pattern11
+        type: f8
+      - id: pattern12
+        type: f8
+  linetype_flag:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: flag6
+        type: b1
+      - id: flag7
+        type: b1
+      - id: frozen
+        type: b1
   real_entities:
     seq:
       - id: entities
