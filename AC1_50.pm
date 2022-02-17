@@ -2004,7 +2004,7 @@ sub _read {
     $self->{y} = $self->{_io}->read_f8le();
     $self->{height} = $self->{_io}->read_f8le();
     $self->{size} = $self->{_io}->read_s2le();
-    $self->{value} = $self->{_io}->read_bytes($self->size());
+    $self->{value} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->size()), 0, 0));
     if ($self->entity_common()->flag2_8()) {
         $self->{angle} = $self->{_io}->read_f8le();
     }
