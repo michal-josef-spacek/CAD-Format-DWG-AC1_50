@@ -239,7 +239,7 @@ types:
       - id: current_layer_index
         type: s2
         doc: 0x014a-0x014b, $CLAYER
-      - id: unknown5
+      - id: current_color_convert
         type: s2
         doc: 0x014c-0x014d, (2, 3, 8, 15 - default)
       - id: unknown6
