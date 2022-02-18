@@ -23,23 +23,23 @@ seq:
   - id: blocks
     type: block
     repeat: expr
-    repeat-expr: header.table_block_items
+    repeat-expr: header.table_block.items
   - id: layers
     type: layer
     repeat: expr
-    repeat-expr: header.table_layer_items
+    repeat-expr: header.table_layer.items
   - id: styles
     type: style
     repeat: expr
-    repeat-expr: header.table_style_items
+    repeat-expr: header.table_style.items
   - id: linetypes
     type: linetype
     repeat: expr
-    repeat-expr: header.table_linetype_items
+    repeat-expr: header.table_linetype.items
   - id: views
     type: view
     repeat: expr
-    repeat-expr: header.table_view_items
+    repeat-expr: header.table_view.items
   - id: block_entities
     type: real_entities
     size: header.blocks_size_b
@@ -114,46 +114,16 @@ types:
         size: 2
       - id: unknown4c
         size: 2
-      - id: table_block_item_size
-        type: u2
-      - id: table_block_items
-        type: u2
-      - id: unknown4e
-        size: 2
-      - id: table_block_begin
-        type: u4
-      - id: table_layer_item_size
-        type: u2
-      - id: table_layer_items
-        type: u2
-      - id: unknown4g
-        size: 2
-      - id: table_layer_begin
-        type: u4
-      - id: table_style_item_size
-        type: u2
-      - id: table_style_items
-        type: u2
-      - id: unknown4i
-        size: 2
-      - id: table_style_begin
-        type: u4
-      - id: table_linetype_item_size
-        type: u2
-      - id: table_linetype_items
-        type: u2
-      - id: unknown4k
-        size: 2
-      - id: table_linetype_begin
-        type: u4
-      - id: table_view_item_size
-        type: u2
-      - id: table_view_items
-        type: u2
-      - id: unknown4m
-        size: 2
-      - id: table_view_begin
-        type: u4
+      - id: table_block
+        type: table
+      - id: table_layer
+        type: table
+      - id: table_style
+        type: table
+      - id: table_linetype
+        type: table
+      - id: table_view
+        type: table
       - id: variables
         type: header_variables
     instances:
@@ -161,6 +131,16 @@ types:
          value: (blocks_size & 0xff000000) >> 24
       blocks_size_b:
          value: (blocks_size & 0x00ffffff)
+  table:
+    seq:
+      - id: item_size
+        type: u2
+      - id: items
+        type: u2
+      - id: unknown
+        size: 2
+      - id: begin
+        type: u4
   header_variables:
     seq:
       - id: insertion_base
