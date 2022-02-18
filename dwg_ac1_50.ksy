@@ -526,12 +526,9 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: start_point_x
-        type: f8
-        doc: ATTDEF/10
-      - id: start_point_y
-        type: f8
-        doc: ATTDEF/20
+      - id: start_point
+        type: point_2d
+        doc: ATTDEF/10|20
       - id: height
         type: f8
         doc: ATTDEF/40
@@ -568,14 +565,10 @@ types:
         type: attdef_flags2
         if: entity_common.flag2_2
         doc: ATTDEF/72
-      - id: end_point_x
-        type: f8
+      - id: end_point
+        type: point_2d
         if: entity_common.flag2_1
-        doc: ATTDEF/11
-      - id: end_point_y
-        type: f8
-        if: entity_common.flag2_1
-        doc: ATTDEF/21
+        doc: ATTDEF/11|21
   attdef_flags:
     seq:
       - id: flag_1
@@ -722,18 +715,12 @@ types:
         type: entity_common
       - id: block_index
         type: s2
-      - id: dimension_line_defining_point_x
-        type: f8
-        doc: DIMENSION/10
-      - id: dimension_line_defining_point_y
-        type: f8
-        doc: DIMENSION/20
-      - id: default_text_position_x
-        type: f8
-        doc: DIMENSION/11
-      - id: default_text_position_y
-        type: f8
-        doc: DIMENSION/21
+      - id: dimension_line_defining_point
+        type: point_2d
+        doc: DIMENSION/10|20
+      - id: default_text_position
+        type: point_2d
+        doc: DIMENSION/11|21
       - id: unknown1
         type: u1
         if: entity_common.flag2_7
@@ -745,35 +732,20 @@ types:
         size: text_size
         if: entity_common.flag2_6
         doc: DIMENSION/1
-      - id: extension_defining_point1_x
-        type: f8
+      - id: extension_defining_point1
+        type: point_2d
         if: entity_common.flag2_5
-        doc: DIMENSION/13
-      - id: extension_defining_point1_y
-        type: f8
-        if: entity_common.flag2_5
-        doc: DIMENSION/23
-      - id: extension_defining_point2_x
-        type: f8
+        doc: DIMENSION/13|23
+      - id: extension_defining_point2
+        type: point_2d
         if: entity_common.flag2_4
-        doc: DIMENSION/14
-      - id: extension_defining_point2_y
-        type: f8
-        if: entity_common.flag2_4
-        doc: DIMENSION/24
-      - id: defining_point_x
-        type: f8
+        doc: DIMENSION/14|24
+      - id: defining_point
+        type: point_2d
         if: entity_common.flag2_3
-        doc: DIMENSION/15
-      - id: defining_point_y
-        type: f8
-        if: entity_common.flag2_3
-        doc: DIMENSION/25
-      - id: dimension_line_arc_definition_point_x
-        type: f8
-        if: entity_common.flag2_2
-      - id: dimension_line_arc_definition_point_y
-        type: f8
+        doc: DIMENSION/15|25
+      - id: dimension_line_arc_definition_point
+        type: point_2d
         if: entity_common.flag2_2
       - id: rotation_in_radians
         type: f8
@@ -903,22 +875,14 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: from_x
-        type: f8
-      - id: from_y
-        type: f8
-      - id: from_and_x
-        type: f8
-      - id: from_and_y
-        type: f8
-      - id: to_x
-        type: f8
-      - id: to_y
-        type: f8
-      - id: to_and_x
-        type: f8
-      - id: to_and_y
-        type: f8
+      - id: from
+        type: point_2d
+      - id: from_and
+        type: point_2d
+      - id: to
+        type: point_2d
+      - id: to_and
+        type: point_2d
   entity_text:
     seq:
       - id: entity_common
@@ -964,34 +928,22 @@ types:
         type: u1
         if: entity_common.flag2_3
         doc: TEXT/72
-      - id: aligned_to_x
-        type: f8
+      - id: aligned_to
+        type: point_2d
         if: entity_common.flag2_2
-        doc: TEXT/11
-      - id: aligned_to_y
-        type: f8
-        if: entity_common.flag2_2
-        doc: TEXT/21
+        doc: TEXT/11|21
   entity_trace:
     seq:
       - id: entity_common
         type: entity_common
-      - id: from_x
-        type: f8
-      - id: from_y
-        type: f8
-      - id: from_and_x
-        type: f8
-      - id: from_and_y
-        type: f8
-      - id: to_x
-        type: f8
-      - id: to_y
-        type: f8
-      - id: to_and_x
-        type: f8
-      - id: to_and_y
-        type: f8
+      - id: from
+        type: point_2d
+      - id: from_and
+        type: point_2d
+      - id: to
+        type: point_2d
+      - id: to_and
+        type: point_2d
   entity_vertex:
     seq:
       - id: entity_common
@@ -1197,12 +1149,9 @@ types:
       - id: view_size
         type: f8
         doc: VIEW/40
-      - id: center_point_x
-        type: f8
-        doc: VIEW/10
-      - id: center_point_y
-        type: f8
-        doc: VIEW/20
+      - id: center_point
+        type: point_2d
+        doc: VIEW/10|20
       - id: view_width
         type: f8
         doc: VIEW/41
@@ -1210,18 +1159,10 @@ types:
         type: u1
         if: _root.header.num_header_vars == 74
         doc: TODO Right place in sequence?
-      - id: view_dir_x
-        type: f8
+      - id: view_dir
+        type: point_3d
         if: _root.header.num_header_vars == 83
-        doc: VIEW/11
-      - id: view_dir_y
-        type: f8
-        if: _root.header.num_header_vars == 83
-        doc: VIEW/21
-      - id: view_dir_z
-        type: f8
-        if: _root.header.num_header_vars == 83
-        doc: VIEW/31
+        doc: VIEW/11|21|31
       - id: u3
         type: u2
         if: _root.header.num_header_vars == 83
