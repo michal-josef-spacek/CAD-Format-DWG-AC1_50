@@ -96,7 +96,7 @@ types:
         type: s2
       - id: version_minor
         type: s2
-      - id: version_micro
+      - id: num_header_vars
         type: s2
       - id: dwg_version
         type: s1
@@ -355,32 +355,32 @@ types:
         enum: limits_check
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: unknown10
         size: 45
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: elevation
         type: f8
         doc: $ELEVATION
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: thickness
         type: f8
         doc: $THICKNESS
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: view_point
         type: point_3d
         doc: 0x0239-0x0251, $VIEWDIR/10|20|30
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: unknown_repeating
         type: unknown_repeating
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: unknown29
         type: s2
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
       - id: blip
         type: s2
         doc: 0x02e3-0x02e4, $BLIPMODE
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
   unknown_repeating:
     seq:
       - id: unknown_repeating1
@@ -1052,7 +1052,7 @@ types:
         doc: LAYER/6
       - id: unknown4
         type: s1
-        if: _root.header.version_micro == 74
+        if: _root.header.num_header_vars == 74
   layer_flag:
     seq:
       - id: flag1
@@ -1102,7 +1102,7 @@ types:
         doc: LTYPE/49
       - id: unknown1
         type: s1
-        if: _root.header.version_micro == 74
+        if: _root.header.num_header_vars == 74
   pattern:
     seq:
       - id: pattern1
@@ -1228,23 +1228,23 @@ types:
         doc: VIEW/41
       - id: u2
         type: u1
-        if: _root.header.version_micro == 74
+        if: _root.header.num_header_vars == 74
         doc: TODO Right place in sequence?
       - id: view_dir_x
         type: f8
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
         doc: VIEW/11
       - id: view_dir_y
         type: f8
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
         doc: VIEW/21
       - id: view_dir_z
         type: f8
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
         doc: VIEW/31
       - id: u3
         type: u2
-        if: _root.header.version_micro == 83
+        if: _root.header.num_header_vars == 83
   view_flag:
     seq:
       - id: flag1

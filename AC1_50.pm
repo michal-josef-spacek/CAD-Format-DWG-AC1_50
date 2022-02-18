@@ -1292,7 +1292,7 @@ sub _read {
     $self->{num_dashes} = $self->{_io}->read_u1();
     $self->{pattern_len} = $self->{_io}->read_f8le();
     $self->{pattern} = CAD::Format::DWG::AC1_50::Pattern->new($self->{_io}, $self, $self->{_root});
-    if ($self->_root()->header()->version_micro() == 74) {
+    if ($self->_root()->header()->num_header_vars() == 74) {
         $self->{unknown1} = $self->{_io}->read_s1();
     }
 }
@@ -2019,7 +2019,7 @@ sub _read {
     $self->{layer_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
     $self->{color} = $self->{_io}->read_s2le();
     $self->{linetype_index} = $self->{_io}->read_u2le();
-    if ($self->_root()->header()->version_micro() == 74) {
+    if ($self->_root()->header()->num_header_vars() == 74) {
         $self->{unknown4} = $self->{_io}->read_s1();
     }
 }
@@ -2865,28 +2865,28 @@ sub _read {
     $self->{dim_extension_line_first_suppress} = $self->{_io}->read_s1();
     $self->{dim_extension_line_second_suppress} = $self->{_io}->read_s1();
     $self->{dim_text_vertical_position} = $self->{_io}->read_s1();
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{limits_check} = $self->{_io}->read_s2le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{unknown10} = $self->{_io}->read_bytes(45);
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{elevation} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{thickness} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{view_point} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{unknown_repeating} = CAD::Format::DWG::AC1_50::UnknownRepeating->new($self->{_io}, $self, $self->{_root});
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{unknown29} = $self->{_io}->read_s2le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{blip} = $self->{_io}->read_s2le();
     }
 }
@@ -3491,7 +3491,7 @@ sub _read {
     $self->{zero_one_or_three} = $self->{_io}->read_s1();
     $self->{version_major} = $self->{_io}->read_s2le();
     $self->{version_minor} = $self->{_io}->read_s2le();
-    $self->{version_micro} = $self->{_io}->read_s2le();
+    $self->{num_header_vars} = $self->{_io}->read_s2le();
     $self->{dwg_version} = $self->{_io}->read_s1();
     $self->{entities_start} = $self->{_io}->read_u4le();
     $self->{entities_end} = $self->{_io}->read_u4le();
@@ -3562,9 +3562,9 @@ sub version_minor {
     return $self->{version_minor};
 }
 
-sub version_micro {
+sub num_header_vars {
     my ($self) = @_;
-    return $self->{version_micro};
+    return $self->{num_header_vars};
 }
 
 sub dwg_version {
@@ -4342,19 +4342,19 @@ sub _read {
     $self->{center_point_x} = $self->{_io}->read_f8le();
     $self->{center_point_y} = $self->{_io}->read_f8le();
     $self->{view_width} = $self->{_io}->read_f8le();
-    if ($self->_root()->header()->version_micro() == 74) {
+    if ($self->_root()->header()->num_header_vars() == 74) {
         $self->{u2} = $self->{_io}->read_u1();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{view_dir_x} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{view_dir_y} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{view_dir_z} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->version_micro() == 83) {
+    if ($self->_root()->header()->num_header_vars() == 83) {
         $self->{u3} = $self->{_io}->read_u2le();
     }
 }
