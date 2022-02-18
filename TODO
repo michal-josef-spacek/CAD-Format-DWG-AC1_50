@@ -2,7 +2,9 @@ TODO
 ====
 2. Is there a method how to create dwg files?
 9. not if with == num_headers_vars, but >
-10.
+10. Rename version_major
+11. Rename version_minor
+12.
 
 Applied
 =======
