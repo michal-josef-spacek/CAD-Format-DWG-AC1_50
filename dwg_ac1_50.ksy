@@ -1144,12 +1144,10 @@ types:
         type: view_flag
         doc: VIEW/70
       - id: view_name
-        size: 31
+        size: 32
         type: str
         encoding: ASCII
         terminator: 0x00
-      - id: u1
-        type: u1
       - id: view_size
         type: f8
         doc: VIEW/40
