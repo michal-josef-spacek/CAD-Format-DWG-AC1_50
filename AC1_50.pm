@@ -2703,7 +2703,7 @@ sub _read {
     my ($self) = @_;
 
     $self->{insertion_base} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
-    $self->{number_of_entities} = $self->{_io}->read_u2le();
+    $self->{num_entities} = $self->{_io}->read_u2le();
     $self->{drawing_first} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{drawing_second} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{limits_min} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
@@ -2793,9 +2793,9 @@ sub insertion_base {
     return $self->{insertion_base};
 }
 
-sub number_of_entities {
+sub num_entities {
     my ($self) = @_;
-    return $self->{number_of_entities};
+    return $self->{num_entities};
 }
 
 sub drawing_first {
