@@ -2,7 +2,9 @@ TODO
 ====
 2. Is there a method how to create dwg files?
 9. not if with == num_headers_vars, but >
-12.
+12. entity_shape x|y to point_2d
+13. doc for entity_shape from AC2.10
+14.
 
 Applied
 =======
