@@ -868,7 +868,7 @@ types:
         type: f8
       - id: item_num
         type: u1
-      - id: angle
+      - id: angle_in_radians
         type: f8
         if: entity_common.flag2_8
       - id: load_num
