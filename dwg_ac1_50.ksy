@@ -337,32 +337,32 @@ types:
         enum: limits_check
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: unknown10
         size: 45
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: elevation
         type: f8
         doc: $ELEVATION
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: thickness
         type: f8
         doc: $THICKNESS
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: view_point
         type: point_3d
         doc: 0x0239-0x0251, $VIEWDIR/10|20|30
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: unknown_repeating
         type: unknown_repeating
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: unknown29
         type: s2
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
       - id: blip
         type: s2
         doc: 0x02e3-0x02e4, $BLIPMODE
-        if: _root.header.num_header_vars == 83
+        if: _parent.num_header_vars == 83
   unknown_repeating:
     seq:
       - id: unknown_repeating1

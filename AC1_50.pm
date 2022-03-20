@@ -2756,28 +2756,28 @@ sub _read {
     $self->{dim_extension_line_first_suppress} = $self->{_io}->read_s1();
     $self->{dim_extension_line_second_suppress} = $self->{_io}->read_s1();
     $self->{dim_text_vertical_position} = $self->{_io}->read_s1();
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{limits_check} = $self->{_io}->read_s2le();
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{unknown10} = $self->{_io}->read_bytes(45);
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{elevation} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{thickness} = $self->{_io}->read_f8le();
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{view_point} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{unknown_repeating} = CAD::Format::DWG::AC1_50::UnknownRepeating->new($self->{_io}, $self, $self->{_root});
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{unknown29} = $self->{_io}->read_s2le();
     }
-    if ($self->_root()->header()->num_header_vars() == 83) {
+    if ($self->_parent()->num_header_vars() == 83) {
         $self->{blip} = $self->{_io}->read_s2le();
     }
 }
