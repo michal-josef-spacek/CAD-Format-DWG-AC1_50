@@ -281,10 +281,10 @@ types:
         type: str
         encoding: ASCII
         terminator: 0x00
-        doc: $MENU
+        doc: 0x0194-0x01a2, $MENU
       - id: dim_scale
         type: f8
-        doc: $DIMSCALE
+        doc: 0x01a3-0x01aa, $DIMSCALE
       - id: dim_arrowhead_size
         type: f8
         doc: $DIMASZ
@@ -343,11 +343,11 @@ types:
         if: _parent.num_header_vars == 83
       - id: elevation
         type: f8
-        doc: $ELEVATION
+        doc: 0x0229-0x0230, $ELEVATION
         if: _parent.num_header_vars == 83
       - id: thickness
         type: f8
-        doc: $THICKNESS
+        doc: 0x0231-0x0238, $THICKNESS
         if: _parent.num_header_vars == 83
       - id: view_point
         type: point_3d
@@ -355,9 +355,11 @@ types:
         if: _parent.num_header_vars == 83
       - id: unknown_repeating
         type: unknown_repeating
+        doc: 0x0252-0x02e0
         if: _parent.num_header_vars == 83
       - id: unknown29
         type: s2
+        doc: 0x02e1-0x02e2
         if: _parent.num_header_vars == 83
       - id: blip
         type: s2
