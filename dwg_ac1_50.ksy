@@ -940,7 +940,7 @@ types:
         doc: SHAPE/10
       - id: y
         type: f8
-        doc: SHAPE/10
+        doc: SHAPE/20
       - id: height
         type: f8
         doc: SHAPE/40
