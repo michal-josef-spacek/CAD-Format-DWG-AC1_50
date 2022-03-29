@@ -338,8 +338,72 @@ types:
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
         if: _parent.num_header_vars == 83
-      - id: unknown10
-        size: 45
+      - id: unknown10a
+        type: u1
+        doc: 0x01fc
+        if: _parent.num_header_vars == 83
+      - id: unknown10b
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10c
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10d
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10e
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10f
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10g
+        type: f8
+        if: _parent.num_header_vars == 83
+      - id: unknown10h
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10i
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10j
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10k
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10l
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10m
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10n
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10o
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10p
+        type: f8
+        if: _parent.num_header_vars == 83
+      - id: unknown10q
+        type: f8
+        if: _parent.num_header_vars == 83
+      - id: unknown10r
+        type: u2
+        if: _parent.num_header_vars == 83
+      - id: unknown10s
+        type: u2
+        if: _parent.num_header_vars == 83
+      - id: unknown10t
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10u
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10v
+        type: u1
         if: _parent.num_header_vars == 83
       - id: elevation
         type: f8
