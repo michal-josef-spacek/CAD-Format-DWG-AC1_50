@@ -4,7 +4,10 @@ TODO
 9. not if with == num_headers_vars, but >
 12. entity_shape x|y to point_2d
 14. ~/lang/dwg/AC1.50/from_autocad_2.15/LNX170C1.DWG something wrong
-15.
+On the end: cc cc 4c 10 40 de 32 33 33 33 53 1b 40
+15. ~/lang/dwg/AC1.50/from_autocad_2.02a/TESTPATN.DWG and VIEW
+Size of view is 66.
+16.
 
 Applied
 =======
