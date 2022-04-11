@@ -236,7 +236,7 @@ types:
       - id: unknown7c
         type: s2
         doc: 0x015a-0x015b
-      - id: unknown8
+      - id: unknown_conversion_from_1_40
         type: f8
         doc: 0x015c-0x0163
       - id: linear_units_format

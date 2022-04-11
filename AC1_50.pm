@@ -2726,7 +2726,7 @@ sub _read {
     $self->{unknown7a} = $self->{_io}->read_s2le();
     $self->{unknown7b} = $self->{_io}->read_s2le();
     $self->{unknown7c} = $self->{_io}->read_s2le();
-    $self->{unknown8} = $self->{_io}->read_f8le();
+    $self->{unknown_conversion_from_1_40} = $self->{_io}->read_f8le();
     $self->{linear_units_format} = $self->{_io}->read_s2le();
     $self->{linear_units_precision} = $self->{_io}->read_s2le();
     $self->{axis} = $self->{_io}->read_s2le();
@@ -2995,9 +2995,9 @@ sub unknown7c {
     return $self->{unknown7c};
 }
 
-sub unknown8 {
+sub unknown_conversion_from_1_40 {
     my ($self) = @_;
-    return $self->{unknown8};
+    return $self->{unknown_conversion_from_1_40};
 }
 
 sub linear_units_format {
