@@ -4364,15 +4364,17 @@ sub _read {
     $self->{view_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
     $self->{view_size} = $self->{_io}->read_f8le();
     $self->{center_point} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    $self->{view_width} = $self->{_io}->read_f8le();
     if ($self->_root()->header()->num_header_vars() == 74) {
         $self->{u2} = $self->{_io}->read_u1();
     }
     if ($self->_root()->header()->num_header_vars() == 83) {
+        $self->{view_width} = $self->{_io}->read_f8le();
+    }
+    if ($self->_root()->header()->table_view()->items() >= 66) {
         $self->{view_dir} = CAD::Format::DWG::AC1_50::Point3d->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->_root()->header()->num_header_vars() == 83) {
-        $self->{u3} = $self->{_io}->read_u2le();
+        $self->{flag_3d} = $self->{_io}->read_u2le();
     }
 }
 
@@ -4396,14 +4398,14 @@ sub center_point {
     return $self->{center_point};
 }
 
-sub view_width {
-    my ($self) = @_;
-    return $self->{view_width};
-}
-
 sub u2 {
     my ($self) = @_;
     return $self->{u2};
+}
+
+sub view_width {
+    my ($self) = @_;
+    return $self->{view_width};
 }
 
 sub view_dir {
@@ -4411,9 +4413,9 @@ sub view_dir {
     return $self->{view_dir};
 }
 
-sub u3 {
+sub flag_3d {
     my ($self) = @_;
-    return $self->{u3};
+    return $self->{flag_3d};
 }
 
 1;

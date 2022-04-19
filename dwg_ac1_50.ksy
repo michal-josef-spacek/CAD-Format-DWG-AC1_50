@@ -1226,24 +1226,25 @@ types:
         type: str
         encoding: ASCII
         terminator: 0x00
+        doc: VIEW/2
       - id: view_size
         type: f8
         doc: VIEW/40
       - id: center_point
         type: point_2d
         doc: VIEW/10|20
-      - id: view_width
-        type: f8
-        doc: VIEW/41
       - id: u2
         type: u1
         if: _root.header.num_header_vars == 74
-        doc: TODO Right place in sequence?
+      - id: view_width
+        type: f8
+        doc: VIEW/41
+        if: _root.header.num_header_vars == 83
       - id: view_dir
         type: point_3d
-        if: _root.header.num_header_vars == 83
+        if: _root.header.table_view.items >= 66
         doc: VIEW/11|21|31
-      - id: u3
+      - id: flag_3d
         type: u2
         if: _root.header.num_header_vars == 83
   view_flag:
