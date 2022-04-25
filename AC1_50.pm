@@ -279,25 +279,33 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1_50::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{u1} = $self->{_io}->read_f8le();
-    $self->{u2} = $self->{_io}->read_f8le();
-    $self->{u3} = $self->{_io}->read_f8le();
-    $self->{size} = $self->{_io}->read_s2le();
-    $self->{text} = $self->{_io}->read_bytes($self->size());
-    $self->{size2} = $self->{_io}->read_s2le();
-    $self->{text2} = $self->{_io}->read_bytes($self->size2());
-    $self->{u4} = $self->{_io}->read_bytes(1);
+    $self->{point_from} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{height} = $self->{_io}->read_f8le();
+    $self->{value_size} = $self->{_io}->read_s2le();
+    $self->{value} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->value_size()), 0, 0));
+    $self->{tag_size} = $self->{_io}->read_s2le();
+    $self->{tag} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->tag_size()), 0, 0));
+    $self->{flags} = CAD::Format::DWG::AC1_50::AttrFlags->new($self->{_io}, $self, $self->{_root});
     if ($self->entity_common()->flag2_7()) {
-        $self->{u5} = $self->{_io}->read_f8le();
+        $self->{rotation_angle_in_radians} = $self->{_io}->read_f8le();
+    }
+    if ($self->entity_common()->flag2_6()) {
+        $self->{width_scale_factor} = $self->{_io}->read_f8le();
+    }
+    if ($self->entity_common()->flag2_5()) {
+        $self->{obliquing_angle_in_radians} = $self->{_io}->read_f8le();
+    }
+    if ($self->entity_common()->flag2_4()) {
+        $self->{u1} = $self->{_io}->read_u1();
+    }
+    if ($self->entity_common()->flag2_3()) {
+        $self->{generation} = CAD::Format::DWG::AC1_50::GenerationFlags->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_2()) {
-        $self->{u6} = $self->{_io}->read_u1();
+        $self->{horiz_text_justification_type} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_1()) {
-        $self->{u7} = $self->{_io}->read_f8le();
-    }
-    if ($self->entity_common()->flag2_1()) {
-        $self->{u8} = $self->{_io}->read_f8le();
+        $self->{aligned_to} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
     }
 }
 
@@ -306,64 +314,74 @@ sub entity_common {
     return $self->{entity_common};
 }
 
+sub point_from {
+    my ($self) = @_;
+    return $self->{point_from};
+}
+
+sub height {
+    my ($self) = @_;
+    return $self->{height};
+}
+
+sub value_size {
+    my ($self) = @_;
+    return $self->{value_size};
+}
+
+sub value {
+    my ($self) = @_;
+    return $self->{value};
+}
+
+sub tag_size {
+    my ($self) = @_;
+    return $self->{tag_size};
+}
+
+sub tag {
+    my ($self) = @_;
+    return $self->{tag};
+}
+
+sub flags {
+    my ($self) = @_;
+    return $self->{flags};
+}
+
+sub rotation_angle_in_radians {
+    my ($self) = @_;
+    return $self->{rotation_angle_in_radians};
+}
+
+sub width_scale_factor {
+    my ($self) = @_;
+    return $self->{width_scale_factor};
+}
+
+sub obliquing_angle_in_radians {
+    my ($self) = @_;
+    return $self->{obliquing_angle_in_radians};
+}
+
 sub u1 {
     my ($self) = @_;
     return $self->{u1};
 }
 
-sub u2 {
+sub generation {
     my ($self) = @_;
-    return $self->{u2};
+    return $self->{generation};
 }
 
-sub u3 {
+sub horiz_text_justification_type {
     my ($self) = @_;
-    return $self->{u3};
+    return $self->{horiz_text_justification_type};
 }
 
-sub size {
+sub aligned_to {
     my ($self) = @_;
-    return $self->{size};
-}
-
-sub text {
-    my ($self) = @_;
-    return $self->{text};
-}
-
-sub size2 {
-    my ($self) = @_;
-    return $self->{size2};
-}
-
-sub text2 {
-    my ($self) = @_;
-    return $self->{text2};
-}
-
-sub u4 {
-    my ($self) = @_;
-    return $self->{u4};
-}
-
-sub u5 {
-    my ($self) = @_;
-    return $self->{u5};
-}
-
-sub u6 {
-    my ($self) = @_;
-    return $self->{u6};
-}
-
-sub u7 {
-    my ($self) = @_;
-    return $self->{u7};
-}
-
-sub u8 {
-    my ($self) = @_;
-    return $self->{u8};
+    return $self->{aligned_to};
 }
 
 ########################################################################
@@ -1136,6 +1154,86 @@ sub flag7 {
 sub closed {
     my ($self) = @_;
     return $self->{closed};
+}
+
+########################################################################
+package CAD::Format::DWG::AC1_50::AttrFlags;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{flag1} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag2} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag3} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag4} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag5} = $self->{_io}->read_bits_int_be(1);
+    $self->{verify} = $self->{_io}->read_bits_int_be(1);
+    $self->{constant} = $self->{_io}->read_bits_int_be(1);
+    $self->{invisible} = $self->{_io}->read_bits_int_be(1);
+}
+
+sub flag1 {
+    my ($self) = @_;
+    return $self->{flag1};
+}
+
+sub flag2 {
+    my ($self) = @_;
+    return $self->{flag2};
+}
+
+sub flag3 {
+    my ($self) = @_;
+    return $self->{flag3};
+}
+
+sub flag4 {
+    my ($self) = @_;
+    return $self->{flag4};
+}
+
+sub flag5 {
+    my ($self) = @_;
+    return $self->{flag5};
+}
+
+sub verify {
+    my ($self) = @_;
+    return $self->{verify};
+}
+
+sub constant {
+    my ($self) = @_;
+    return $self->{constant};
+}
+
+sub invisible {
+    my ($self) = @_;
+    return $self->{invisible};
 }
 
 ########################################################################
