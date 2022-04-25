@@ -50,8 +50,9 @@ our $ISO_PLANE_LEFT = 0;
 our $ISO_PLANE_TOP = 1;
 our $ISO_PLANE_RIGHT = 2;
 
+our $TEXT_TYPE_LEFT = 0;
 our $TEXT_TYPE_CENTER = 1;
-our $TEXT_TYPE_END = 2;
+our $TEXT_TYPE_RIGHT = 2;
 our $TEXT_TYPE_ALIGNED = 3;
 
 our $ATTRIBUTES_FALSE = 0;
