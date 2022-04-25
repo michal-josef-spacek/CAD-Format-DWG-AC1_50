@@ -2094,86 +2094,6 @@ sub unknown4 {
 }
 
 ########################################################################
-package CAD::Format::DWG::AC1_50::AttdefFlags2;
-
-our @ISA = 'IO::KaitaiStruct::Struct';
-
-sub from_file {
-    my ($class, $filename) = @_;
-    my $fd;
-
-    open($fd, '<', $filename) or return undef;
-    binmode($fd);
-    return new($class, IO::KaitaiStruct::Stream->new($fd));
-}
-
-sub new {
-    my ($class, $_io, $_parent, $_root) = @_;
-    my $self = IO::KaitaiStruct::Struct->new($_io);
-
-    bless $self, $class;
-    $self->{_parent} = $_parent;
-    $self->{_root} = $_root || $self;;
-
-    $self->_read();
-
-    return $self;
-}
-
-sub _read {
-    my ($self) = @_;
-
-    $self->{flag_1} = $self->{_io}->read_bits_int_be(1);
-    $self->{flag_2} = $self->{_io}->read_bits_int_be(1);
-    $self->{flag_3} = $self->{_io}->read_bits_int_be(1);
-    $self->{flag_4} = $self->{_io}->read_bits_int_be(1);
-    $self->{flag_5} = $self->{_io}->read_bits_int_be(1);
-    $self->{middle} = $self->{_io}->read_bits_int_be(1);
-    $self->{right} = $self->{_io}->read_bits_int_be(1);
-    $self->{center} = $self->{_io}->read_bits_int_be(1);
-}
-
-sub flag_1 {
-    my ($self) = @_;
-    return $self->{flag_1};
-}
-
-sub flag_2 {
-    my ($self) = @_;
-    return $self->{flag_2};
-}
-
-sub flag_3 {
-    my ($self) = @_;
-    return $self->{flag_3};
-}
-
-sub flag_4 {
-    my ($self) = @_;
-    return $self->{flag_4};
-}
-
-sub flag_5 {
-    my ($self) = @_;
-    return $self->{flag_5};
-}
-
-sub middle {
-    my ($self) = @_;
-    return $self->{middle};
-}
-
-sub right {
-    my ($self) = @_;
-    return $self->{right};
-}
-
-sub center {
-    my ($self) = @_;
-    return $self->{center};
-}
-
-########################################################################
 package CAD::Format::DWG::AC1_50::Block;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -2495,7 +2415,7 @@ sub _read {
         $self->{unknown_index} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_2()) {
-        $self->{flags2} = CAD::Format::DWG::AC1_50::AttdefFlags2->new($self->{_io}, $self, $self->{_root});
+        $self->{text_type} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_1()) {
         $self->{end_point} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
@@ -2567,9 +2487,9 @@ sub unknown_index {
     return $self->{unknown_index};
 }
 
-sub flags2 {
+sub text_type {
     my ($self) = @_;
-    return $self->{flags2};
+    return $self->{text_type};
 }
 
 sub end_point {

@@ -638,8 +638,9 @@ types:
       - id: unknown_index
         type: u1
         if: entity_common.flag2_4
-      - id: flags2
-        type: attdef_flags2
+      - id: text_type
+        type: u1
+        enum: text_type
         if: entity_common.flag2_2
         doc: ATTDEF/72
       - id: end_point
@@ -663,25 +664,6 @@ types:
       - id: constant
         type: b1
       - id: invisible
-        type: b1
-  attdef_flags2:
-    seq:
-## TODO Tohle je divne
-      - id: flag_1
-        type: b1
-      - id: flag_2
-        type: b1
-      - id: flag_3
-        type: b1
-      - id: flag_4
-        type: b1
-      - id: flag_5
-        type: b1
-      - id: middle
-        type: b1
-      - id: right
-        type: b1
-      - id: center
         type: b1
   entity_attrib:
     seq:
