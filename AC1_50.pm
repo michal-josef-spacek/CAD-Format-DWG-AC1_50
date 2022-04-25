@@ -1842,9 +1842,9 @@ sub _read {
     $self->{flag_3} = $self->{_io}->read_bits_int_be(1);
     $self->{flag_4} = $self->{_io}->read_bits_int_be(1);
     $self->{flag_5} = $self->{_io}->read_bits_int_be(1);
-    $self->{invisible} = $self->{_io}->read_bits_int_be(1);
-    $self->{constant} = $self->{_io}->read_bits_int_be(1);
     $self->{verify} = $self->{_io}->read_bits_int_be(1);
+    $self->{constant} = $self->{_io}->read_bits_int_be(1);
+    $self->{invisible} = $self->{_io}->read_bits_int_be(1);
 }
 
 sub flag_1 {
@@ -1872,9 +1872,9 @@ sub flag_5 {
     return $self->{flag_5};
 }
 
-sub invisible {
+sub verify {
     my ($self) = @_;
-    return $self->{invisible};
+    return $self->{verify};
 }
 
 sub constant {
@@ -1882,9 +1882,9 @@ sub constant {
     return $self->{constant};
 }
 
-sub verify {
+sub invisible {
     my ($self) = @_;
-    return $self->{verify};
+    return $self->{invisible};
 }
 
 ########################################################################

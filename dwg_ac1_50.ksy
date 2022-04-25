@@ -658,11 +658,11 @@ types:
         type: b1
       - id: flag_5
         type: b1
-      - id: invisible
+      - id: verify
         type: b1
       - id: constant
         type: b1
-      - id: verify
+      - id: invisible
         type: b1
   attdef_flags2:
     seq:
