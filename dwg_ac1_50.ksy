@@ -1059,13 +1059,13 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: from
+      - id: corner1
         type: point_2d
-      - id: from_and
+      - id: corner2
         type: point_2d
-      - id: to
+      - id: corner3
         type: point_2d
-      - id: to_and
+      - id: corner4
         type: point_2d
   entity_vertex:
     seq:
