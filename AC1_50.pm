@@ -845,10 +845,10 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1_50::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{from} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    $self->{from_and} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    $self->{to} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    $self->{to_and} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{corner1} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{corner2} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{corner3} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{corner4} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
 }
 
 sub entity_common {
@@ -856,24 +856,24 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub from {
+sub corner1 {
     my ($self) = @_;
-    return $self->{from};
+    return $self->{corner1};
 }
 
-sub from_and {
+sub corner2 {
     my ($self) = @_;
-    return $self->{from_and};
+    return $self->{corner2};
 }
 
-sub to {
+sub corner3 {
     my ($self) = @_;
-    return $self->{to};
+    return $self->{corner3};
 }
 
-sub to_and {
+sub corner4 {
     my ($self) = @_;
-    return $self->{to_and};
+    return $self->{corner4};
 }
 
 ########################################################################
