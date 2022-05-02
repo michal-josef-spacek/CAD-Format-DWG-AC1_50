@@ -296,7 +296,7 @@ sub _read {
         $self->{obliquing_angle_in_radians} = $self->{_io}->read_f8le();
     }
     if ($self->entity_common()->flag2_4()) {
-        $self->{u1} = $self->{_io}->read_u1();
+        $self->{text_style_index} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_3()) {
         $self->{generation} = CAD::Format::DWG::AC1_50::GenerationFlags->new($self->{_io}, $self, $self->{_root});
@@ -364,9 +364,9 @@ sub obliquing_angle_in_radians {
     return $self->{obliquing_angle_in_radians};
 }
 
-sub u1 {
+sub text_style_index {
     my ($self) = @_;
-    return $self->{u1};
+    return $self->{text_style_index};
 }
 
 sub generation {
@@ -2510,7 +2510,7 @@ sub _read {
         $self->{width_scale_factor} = $self->{_io}->read_f8le();
     }
     if ($self->entity_common()->flag2_4()) {
-        $self->{unknown_index} = $self->{_io}->read_u1();
+        $self->{text_style_index} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_2()) {
         $self->{text_type} = $self->{_io}->read_u1();
@@ -2580,9 +2580,9 @@ sub width_scale_factor {
     return $self->{width_scale_factor};
 }
 
-sub unknown_index {
+sub text_style_index {
     my ($self) = @_;
-    return $self->{unknown_index};
+    return $self->{text_style_index};
 }
 
 sub text_type {
