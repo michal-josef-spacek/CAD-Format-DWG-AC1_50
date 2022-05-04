@@ -633,10 +633,18 @@ types:
         type: f8
         if: entity_common.flag2_6
         doc: ATTDEF/41
+      - id: obliquing_angle_in_radians
+        type: f8
+        if: entity_common.flag2_5
+        doc: ATTDEF/51
       - id: text_style_index
         type: u1
         if: entity_common.flag2_4
         doc: ATTDEF/7
+      - id: generation
+        type: generation_flags
+        if: entity_common.flag2_3
+        doc: ATTDEF/71
       - id: text_type
         type: u1
         enum: text_type
