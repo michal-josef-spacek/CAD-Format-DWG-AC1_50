@@ -3918,14 +3918,15 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1_50::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{x} = $self->{_io}->read_f8le();
-    $self->{y} = $self->{_io}->read_f8le();
+    $self->{start_point} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{height} = $self->{_io}->read_f8le();
     $self->{item_num} = $self->{_io}->read_u1();
     if ($self->entity_common()->flag2_8()) {
         $self->{angle_in_radians} = $self->{_io}->read_f8le();
     }
-    $self->{load_num} = $self->{_io}->read_u1();
+    if ($self->entity_common()->flag2_7()) {
+        $self->{load_num} = $self->{_io}->read_u1();
+    }
 }
 
 sub entity_common {
@@ -3933,14 +3934,9 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub x {
+sub start_point {
     my ($self) = @_;
-    return $self->{x};
-}
-
-sub y {
-    my ($self) = @_;
-    return $self->{y};
+    return $self->{start_point};
 }
 
 sub height {

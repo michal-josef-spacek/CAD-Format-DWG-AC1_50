@@ -2,7 +2,6 @@ TODO
 ====
 2. Is there a method how to create dwg files?
 9. not if with == num_headers_vars, but >
-12. entity_shape x|y to point_2d
 14. ~/lang/dwg/AC1.50/from_autocad_2.15/LNX170C1.DWG something wrong
 On the end: cc cc 4c 10 40 de 32 33 33 33 53 1b 40
 15. ~/lang/dwg/AC1.50/from_autocad_2.02a/TESTPATN.DWG and VIEW
@@ -40,3 +39,6 @@ OK [20220224] skim
 
 13. doc for entity_shape from AC2.10
 OK [20220329] skim
+
+12. entity_shape x|y to point_2d
+OK [20220504] skim

@@ -985,12 +985,9 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: x
-        type: f8
-        doc: SHAPE/10
-      - id: y
-        type: f8
-        doc: SHAPE/20
+      - id: start_point
+        type: point_2d
+        doc: SHAPE/10|20
       - id: height
         type: f8
         doc: SHAPE/40
@@ -1003,6 +1000,7 @@ types:
         doc: SHAPE/50
       - id: load_num
         type: u1
+        if: entity_common.flag2_7
   entity_solid:
     seq:
       - id: entity_common
