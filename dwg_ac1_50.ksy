@@ -59,10 +59,8 @@ types:
         encoding: ASCII
         terminator: 0x00
         doc: BLOCK/2
-      - id: u2
-        type: s1
-      - id: u3
-        type: s1
+      - id: begin_address_in_block_table
+        type: u2
       - id: u4
         type: s1
       - id: u5
@@ -81,9 +79,9 @@ types:
         type: b1
       - id: flag6
         type: b1
-      - id: flag7
+      - id: has_attributes
         type: b1
-      - id: flag8
+      - id: anonymous
         type: b1
   header:
     seq:

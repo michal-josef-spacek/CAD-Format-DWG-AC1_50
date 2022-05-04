@@ -550,8 +550,8 @@ sub _read {
     $self->{flag4} = $self->{_io}->read_bits_int_be(1);
     $self->{flag5} = $self->{_io}->read_bits_int_be(1);
     $self->{flag6} = $self->{_io}->read_bits_int_be(1);
-    $self->{flag7} = $self->{_io}->read_bits_int_be(1);
-    $self->{flag8} = $self->{_io}->read_bits_int_be(1);
+    $self->{has_attributes} = $self->{_io}->read_bits_int_be(1);
+    $self->{anonymous} = $self->{_io}->read_bits_int_be(1);
 }
 
 sub flag1 {
@@ -584,14 +584,14 @@ sub flag6 {
     return $self->{flag6};
 }
 
-sub flag7 {
+sub has_attributes {
     my ($self) = @_;
-    return $self->{flag7};
+    return $self->{has_attributes};
 }
 
-sub flag8 {
+sub anonymous {
     my ($self) = @_;
-    return $self->{flag8};
+    return $self->{anonymous};
 }
 
 ########################################################################
@@ -2217,8 +2217,7 @@ sub _read {
 
     $self->{flag} = CAD::Format::DWG::AC1_50::BlockFlag->new($self->{_io}, $self, $self->{_root});
     $self->{block_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
-    $self->{u2} = $self->{_io}->read_s1();
-    $self->{u3} = $self->{_io}->read_s1();
+    $self->{begin_address_in_block_table} = $self->{_io}->read_u2le();
     $self->{u4} = $self->{_io}->read_s1();
     $self->{u5} = $self->{_io}->read_s1();
 }
@@ -2233,14 +2232,9 @@ sub block_name {
     return $self->{block_name};
 }
 
-sub u2 {
+sub begin_address_in_block_table {
     my ($self) = @_;
-    return $self->{u2};
-}
-
-sub u3 {
-    my ($self) = @_;
-    return $self->{u3};
+    return $self->{begin_address_in_block_table};
 }
 
 sub u4 {
