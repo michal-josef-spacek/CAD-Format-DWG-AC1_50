@@ -2154,7 +2154,7 @@ sub _read {
     $self->{flag} = CAD::Format::DWG::AC1_50::LayerFlag->new($self->{_io}, $self, $self->{_root});
     $self->{layer_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
     $self->{color} = $self->{_io}->read_s2le();
-    $self->{linetype_index} = $self->{_io}->read_u2le();
+    $self->{linetype_index} = $self->{_io}->read_s2le();
     if ($self->_root()->header()->num_header_vars() == 74) {
         $self->{unknown4} = $self->{_io}->read_s1();
     }
