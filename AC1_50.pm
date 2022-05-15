@@ -4137,7 +4137,7 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{entity_mode1} = $self->{_io}->read_bits_int_be(1);
+    $self->{entity_has_attributes_flag} = $self->{_io}->read_bits_int_be(1);
     $self->{entity_mode2} = $self->{_io}->read_bits_int_be(1);
     $self->{entity_mode3} = $self->{_io}->read_bits_int_be(1);
     $self->{entity_mode4} = $self->{_io}->read_bits_int_be(1);
@@ -4147,9 +4147,9 @@ sub _read {
     $self->{entity_color_flag} = $self->{_io}->read_bits_int_be(1);
 }
 
-sub entity_mode1 {
+sub entity_has_attributes_flag {
     my ($self) = @_;
-    return $self->{entity_mode1};
+    return $self->{entity_has_attributes_flag};
 }
 
 sub entity_mode2 {
