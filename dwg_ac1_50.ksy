@@ -752,6 +752,7 @@ types:
         type: entity_common
       - id: insert_point
         type: point_2d
+        doc: BLOCK/10|20
   entity_block_end:
     seq:
       - id: entity_common
