@@ -806,12 +806,9 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: x
-        type: f8
-        doc: CIRCLE/10
-      - id: y
-        type: f8
-        doc: CIRCLE/20
+      - id: center_point
+        type: point_2d
+        doc: CIRCLE/10|20
       - id: radius
         type: f8
         doc: CIRCLE/40
