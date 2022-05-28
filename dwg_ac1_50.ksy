@@ -69,7 +69,7 @@ types:
     seq:
       - id: flag1
         type: b1
-      - id: flag2
+      - id: referenced
         type: b1
       - id: flag3
         type: b1
@@ -1116,7 +1116,7 @@ types:
     seq:
       - id: flag1
         type: b1
-      - id: flag2
+      - id: referenced
         type: b1
       - id: flag3
         type: b1
@@ -1247,7 +1247,7 @@ types:
     seq:
       - id: flag1
         type: b1
-      - id: flag2
+      - id: referenced
         type: b1
       - id: flag3
         type: b1
