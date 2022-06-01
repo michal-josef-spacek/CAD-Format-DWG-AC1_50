@@ -1272,20 +1272,20 @@ types:
       - id: center_point
         type: point_2d
         doc: VIEW/10|20
-      - id: u2
-        type: u1
-        if: _root.header.num_header_vars == 74
       - id: view_width
         type: f8
+        if: _root.header.table_view.item_size > 58
         doc: VIEW/41
-        if: _root.header.num_header_vars == 83
       - id: view_dir
         type: point_3d
-        if: _root.header.table_view.items >= 66
+        if: _root.header.table_view.item_size > 66
         doc: VIEW/11|21|31
       - id: flag_3d
         type: u2
-        if: _root.header.num_header_vars == 83
+        if: _root.header.table_view.item_size > 89
+      - id: u1
+        type: u1
+        if: _root.header.num_header_vars == 74
   view_flag:
     seq:
       - id: flag1
