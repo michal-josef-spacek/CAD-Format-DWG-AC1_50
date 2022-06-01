@@ -2155,8 +2155,8 @@ sub _read {
     $self->{layer_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
     $self->{color} = $self->{_io}->read_s2le();
     $self->{linetype_index} = $self->{_io}->read_s2le();
-    if ($self->_root()->header()->num_header_vars() == 74) {
-        $self->{unknown4} = $self->{_io}->read_s1();
+    if ($self->_root()->header()->table_layer()->item_size() > 37) {
+        $self->{u1} = $self->{_io}->read_s1();
     }
 }
 
@@ -2180,9 +2180,9 @@ sub linetype_index {
     return $self->{linetype_index};
 }
 
-sub unknown4 {
+sub u1 {
     my ($self) = @_;
-    return $self->{unknown4};
+    return $self->{u1};
 }
 
 ########################################################################

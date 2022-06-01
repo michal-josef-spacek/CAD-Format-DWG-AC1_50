@@ -1100,9 +1100,9 @@ types:
       - id: linetype_index
         type: s2
         doc: LAYER/6
-      - id: unknown4
+      - id: u1
         type: s1
-        if: _root.header.num_header_vars == 74
+        if: _root.header.table_layer.item_size > 37
   layer_flag:
     seq:
       - id: flag1
