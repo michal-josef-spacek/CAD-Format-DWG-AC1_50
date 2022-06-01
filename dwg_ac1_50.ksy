@@ -61,10 +61,13 @@ types:
         doc: BLOCK/2
       - id: begin_address_in_block_table
         type: u2
-      - id: u4
+      - id: u1
         type: s1
-      - id: u5
+      - id: u2
         type: s1
+      - id: u3
+        type: s1
+        if: _root.header.table_block.item_size > 37
   block_flag:
     seq:
       - id: flag1
