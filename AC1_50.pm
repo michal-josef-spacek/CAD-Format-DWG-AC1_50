@@ -1452,8 +1452,8 @@ sub _read {
     $self->{num_dashes} = $self->{_io}->read_u1();
     $self->{pattern_len} = $self->{_io}->read_f8le();
     $self->{pattern} = CAD::Format::DWG::AC1_50::Pattern->new($self->{_io}, $self, $self->{_root});
-    if ($self->_root()->header()->num_header_vars() == 74) {
-        $self->{unknown1} = $self->{_io}->read_s1();
+    if ($self->_root()->header()->table_linetype()->item_size() > 187) {
+        $self->{u1} = $self->{_io}->read_s1();
     }
 }
 
@@ -1492,9 +1492,9 @@ sub pattern {
     return $self->{pattern};
 }
 
-sub unknown1 {
+sub u1 {
     my ($self) = @_;
-    return $self->{unknown1};
+    return $self->{u1};
 }
 
 ########################################################################

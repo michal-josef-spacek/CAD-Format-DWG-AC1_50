@@ -1150,9 +1150,9 @@ types:
       - id: pattern
         type: pattern
         doc: LTYPE/49
-      - id: unknown1
+      - id: u1
         type: s1
-        if: _root.header.num_header_vars == 74
+        if: _root.header.table_linetype.item_size > 187
   pattern:
     seq:
       - id: pattern1
