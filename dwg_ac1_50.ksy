@@ -1075,9 +1075,10 @@ types:
       - id: y
         type: f8
         doc: VERTEX/20
-      - id: width
+      - id: start_width
         type: f8
         if: entity_common.flag2_8
+        doc: VERTEX/40
       - id: bulge
         type: f8
         if: entity_common.flag2_6
