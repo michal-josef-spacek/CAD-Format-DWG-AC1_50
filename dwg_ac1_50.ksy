@@ -1079,6 +1079,10 @@ types:
         type: f8
         if: entity_common.flag2_8
         doc: VERTEX/40
+      - id: end_width
+        type: f8
+        if: entity_common.flag2_7
+        doc: VERTEX/41
       - id: bulge
         type: f8
         if: entity_common.flag2_6
