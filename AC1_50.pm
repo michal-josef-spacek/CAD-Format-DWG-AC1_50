@@ -3977,7 +3977,7 @@ sub _read {
         $self->{bulge} = $self->{_io}->read_f8le();
     }
     if ($self->entity_common()->flag2_4()) {
-        $self->{unknown_in_radians} = $self->{_io}->read_f8le();
+        $self->{tangent_dir_in_radians} = $self->{_io}->read_f8le();
     }
 }
 
@@ -4006,9 +4006,9 @@ sub bulge {
     return $self->{bulge};
 }
 
-sub unknown_in_radians {
+sub tangent_dir_in_radians {
     my ($self) = @_;
-    return $self->{unknown_in_radians};
+    return $self->{tangent_dir_in_radians};
 }
 
 ########################################################################

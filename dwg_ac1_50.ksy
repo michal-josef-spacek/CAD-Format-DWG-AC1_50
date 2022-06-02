@@ -1082,7 +1082,7 @@ types:
         type: f8
         if: entity_common.flag2_6
         doc: VERTEX/42
-      - id: unknown_in_radians
+      - id: tangent_dir_in_radians
         type: f8
         if: entity_common.flag2_4
         doc: VERTEX/50
