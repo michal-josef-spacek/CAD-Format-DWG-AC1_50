@@ -42,9 +42,6 @@ our $ENTITIES_SEQEND = 17;
 our $ENTITIES_POLYLINE = 18;
 our $ENTITIES_POLYLINE2 = 19;
 our $ENTITIES_VERTEX = 20;
-our $ENTITIES_LINE3D = 21;
-our $ENTITIES_FACE3D = 22;
-our $ENTITIES_DIM = 23;
 
 our $ISO_PLANE_LEFT = 0;
 our $ISO_PLANE_TOP = 1;
@@ -595,84 +592,6 @@ sub anonymous {
 }
 
 ########################################################################
-package CAD::Format::DWG::AC1_50::EntityLine3d;
-
-our @ISA = 'IO::KaitaiStruct::Struct';
-
-sub from_file {
-    my ($class, $filename) = @_;
-    my $fd;
-
-    open($fd, '<', $filename) or return undef;
-    binmode($fd);
-    return new($class, IO::KaitaiStruct::Stream->new($fd));
-}
-
-sub new {
-    my ($class, $_io, $_parent, $_root) = @_;
-    my $self = IO::KaitaiStruct::Struct->new($_io);
-
-    bless $self, $class;
-    $self->{_parent} = $_parent;
-    $self->{_root} = $_root || $self;;
-
-    $self->_read();
-
-    return $self;
-}
-
-sub _read {
-    my ($self) = @_;
-
-    $self->{entity_common} = CAD::Format::DWG::AC1_50::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{x1} = $self->{_io}->read_f8le();
-    $self->{y1} = $self->{_io}->read_f8le();
-    if ($self->entity_common()->flag2_8()) {
-        $self->{z1} = $self->{_io}->read_f8le();
-    }
-    $self->{x2} = $self->{_io}->read_f8le();
-    $self->{y2} = $self->{_io}->read_f8le();
-    if ($self->entity_common()->flag2_7()) {
-        $self->{z2} = $self->{_io}->read_f8le();
-    }
-}
-
-sub entity_common {
-    my ($self) = @_;
-    return $self->{entity_common};
-}
-
-sub x1 {
-    my ($self) = @_;
-    return $self->{x1};
-}
-
-sub y1 {
-    my ($self) = @_;
-    return $self->{y1};
-}
-
-sub z1 {
-    my ($self) = @_;
-    return $self->{z1};
-}
-
-sub x2 {
-    my ($self) = @_;
-    return $self->{x2};
-}
-
-sub y2 {
-    my ($self) = @_;
-    return $self->{y2};
-}
-
-sub z2 {
-    my ($self) = @_;
-    return $self->{z2};
-}
-
-########################################################################
 package CAD::Format::DWG::AC1_50::Pattern;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -774,44 +693,6 @@ sub pattern11 {
 sub pattern12 {
     my ($self) = @_;
     return $self->{pattern12};
-}
-
-########################################################################
-package CAD::Format::DWG::AC1_50::EntityFace3d;
-
-our @ISA = 'IO::KaitaiStruct::Struct';
-
-sub from_file {
-    my ($class, $filename) = @_;
-    my $fd;
-
-    open($fd, '<', $filename) or return undef;
-    binmode($fd);
-    return new($class, IO::KaitaiStruct::Stream->new($fd));
-}
-
-sub new {
-    my ($class, $_io, $_parent, $_root) = @_;
-    my $self = IO::KaitaiStruct::Struct->new($_io);
-
-    bless $self, $class;
-    $self->{_parent} = $_parent;
-    $self->{_root} = $_root || $self;;
-
-    $self->_read();
-
-    return $self;
-}
-
-sub _read {
-    my ($self) = @_;
-
-    $self->{entity_common} = CAD::Format::DWG::AC1_50::EntityCommon->new($self->{_io}, $self, $self->{_root});
-}
-
-sub entity_common {
-    my ($self) = @_;
-    return $self->{entity_common};
 }
 
 ########################################################################
@@ -2646,126 +2527,6 @@ sub insert_point {
 }
 
 ########################################################################
-package CAD::Format::DWG::AC1_50::EntityDim;
-
-our @ISA = 'IO::KaitaiStruct::Struct';
-
-sub from_file {
-    my ($class, $filename) = @_;
-    my $fd;
-
-    open($fd, '<', $filename) or return undef;
-    binmode($fd);
-    return new($class, IO::KaitaiStruct::Stream->new($fd));
-}
-
-sub new {
-    my ($class, $_io, $_parent, $_root) = @_;
-    my $self = IO::KaitaiStruct::Struct->new($_io);
-
-    bless $self, $class;
-    $self->{_parent} = $_parent;
-    $self->{_root} = $_root || $self;;
-
-    $self->_read();
-
-    return $self;
-}
-
-sub _read {
-    my ($self) = @_;
-
-    $self->{entity_common} = CAD::Format::DWG::AC1_50::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{block_index} = $self->{_io}->read_s2le();
-    $self->{dimension_line_defining_point} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    $self->{default_text_position} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    if ($self->entity_common()->flag2_7()) {
-        $self->{unknown1} = $self->{_io}->read_u1();
-    }
-    if ($self->entity_common()->flag2_6()) {
-        $self->{text_size} = $self->{_io}->read_s2le();
-    }
-    if ($self->entity_common()->flag2_6()) {
-        $self->{text} = $self->{_io}->read_bytes($self->text_size());
-    }
-    if ($self->entity_common()->flag2_5()) {
-        $self->{extension_defining_point1} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    }
-    if ($self->entity_common()->flag2_4()) {
-        $self->{extension_defining_point2} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    }
-    if ($self->entity_common()->flag2_3()) {
-        $self->{defining_point} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    }
-    if ($self->entity_common()->flag2_2()) {
-        $self->{dimension_line_arc_definition_point} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
-    }
-    if ($self->entity_common()->flag3_8()) {
-        $self->{rotation_in_radians} = $self->{_io}->read_f8le();
-    }
-}
-
-sub entity_common {
-    my ($self) = @_;
-    return $self->{entity_common};
-}
-
-sub block_index {
-    my ($self) = @_;
-    return $self->{block_index};
-}
-
-sub dimension_line_defining_point {
-    my ($self) = @_;
-    return $self->{dimension_line_defining_point};
-}
-
-sub default_text_position {
-    my ($self) = @_;
-    return $self->{default_text_position};
-}
-
-sub unknown1 {
-    my ($self) = @_;
-    return $self->{unknown1};
-}
-
-sub text_size {
-    my ($self) = @_;
-    return $self->{text_size};
-}
-
-sub text {
-    my ($self) = @_;
-    return $self->{text};
-}
-
-sub extension_defining_point1 {
-    my ($self) = @_;
-    return $self->{extension_defining_point1};
-}
-
-sub extension_defining_point2 {
-    my ($self) = @_;
-    return $self->{extension_defining_point2};
-}
-
-sub defining_point {
-    my ($self) = @_;
-    return $self->{defining_point};
-}
-
-sub dimension_line_arc_definition_point {
-    my ($self) = @_;
-    return $self->{dimension_line_arc_definition_point};
-}
-
-sub rotation_in_radians {
-    my ($self) = @_;
-    return $self->{rotation_in_radians};
-}
-
-########################################################################
 package CAD::Format::DWG::AC1_50::HeaderVariables;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -3495,9 +3256,6 @@ sub _read {
     elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_REPEAT_BEGIN) {
         $self->{data} = CAD::Format::DWG::AC1_50::EntityRepeatBegin->new($self->{_io}, $self, $self->{_root});
     }
-    elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_DIM) {
-        $self->{data} = CAD::Format::DWG::AC1_50::EntityDim->new($self->{_io}, $self, $self->{_root});
-    }
     elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_BLOCK_BEGIN) {
         $self->{data} = CAD::Format::DWG::AC1_50::EntityBlockBegin->new($self->{_io}, $self, $self->{_root});
     }
@@ -3506,9 +3264,6 @@ sub _read {
     }
     elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_REPEAT_END) {
         $self->{data} = CAD::Format::DWG::AC1_50::EntityRepeatEnd->new($self->{_io}, $self, $self->{_root});
-    }
-    elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_LINE3D) {
-        $self->{data} = CAD::Format::DWG::AC1_50::EntityLine3d->new($self->{_io}, $self, $self->{_root});
     }
     elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_TEXT) {
         $self->{data} = CAD::Format::DWG::AC1_50::EntityText->new($self->{_io}, $self, $self->{_root});
@@ -3527,9 +3282,6 @@ sub _read {
     }
     elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_VERTEX) {
         $self->{data} = CAD::Format::DWG::AC1_50::EntityVertex->new($self->{_io}, $self, $self->{_root});
-    }
-    elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_FACE3D) {
-        $self->{data} = CAD::Format::DWG::AC1_50::EntityFace3d->new($self->{_io}, $self, $self->{_root});
     }
     elsif ($_on == $CAD::Format::DWG::AC1_50::ENTITIES_ATTRIB) {
         $self->{data} = CAD::Format::DWG::AC1_50::EntityAttrib->new($self->{_io}, $self, $self->{_root});

@@ -484,10 +484,7 @@ types:
             'entities::block_end': entity_block_end
             'entities::insert' : entity_insert
             'entities::circle': entity_circle
-            'entities::dim': entity_dim
-            'entities::face3d': entity_face3d
             'entities::line': entity_line
-            'entities::line3d': entity_line3d
             'entities::point': entity_point
             'entities::polyline': entity_polyline
             'entities::polyline2': entity_polyline
@@ -812,51 +809,6 @@ types:
       - id: radius
         type: f8
         doc: CIRCLE/40
-  entity_dim:
-    seq:
-      - id: entity_common
-        type: entity_common
-      - id: block_index
-        type: s2
-      - id: dimension_line_defining_point
-        type: point_2d
-        doc: DIMENSION/10|20
-      - id: default_text_position
-        type: point_2d
-        doc: DIMENSION/11|21
-      - id: unknown1
-        type: u1
-        if: entity_common.flag2_7
-        doc: DIMENSION/70
-      - id: text_size
-        type: s2
-        if: entity_common.flag2_6
-      - id: text
-        size: text_size
-        if: entity_common.flag2_6
-        doc: DIMENSION/1
-      - id: extension_defining_point1
-        type: point_2d
-        if: entity_common.flag2_5
-        doc: DIMENSION/13|23
-      - id: extension_defining_point2
-        type: point_2d
-        if: entity_common.flag2_4
-        doc: DIMENSION/14|24
-      - id: defining_point
-        type: point_2d
-        if: entity_common.flag2_3
-        doc: DIMENSION/15|25
-      - id: dimension_line_arc_definition_point
-        type: point_2d
-        if: entity_common.flag2_2
-      - id: rotation_in_radians
-        type: f8
-        if: entity_common.flag3_8
-  entity_face3d:
-    seq:
-      - id: entity_common
-        type: entity_common
   entity_line:
     seq:
       - id: entity_common
@@ -873,30 +825,6 @@ types:
       - id: y2
         type: f8
         doc: LINE/21
-  entity_line3d:
-    seq:
-      - id: entity_common
-        type: entity_common
-      - id: x1
-        type: f8
-        doc: 3DLINE/10
-      - id: y1
-        type: f8
-        doc: 3DLINE/20
-      - id: z1
-        type: f8
-        if: entity_common.flag2_8
-        doc: 3DLINE/30
-      - id: x2
-        type: f8
-        doc: 3DLINE/11
-      - id: y2
-        type: f8
-        doc: 3DLINE/21
-      - id: z2
-        type: f8
-        if: entity_common.flag2_7
-        doc: 3DLINE/31
   entity_tmp:
     seq:
       - id: entity_mode
@@ -1363,9 +1291,6 @@ enums:
     18: polyline
     19: polyline2
     20: vertex
-    21: line3d
-    22: face3d
-    23: dim
   osnap_modes:
     0: none
     1: endpoint
