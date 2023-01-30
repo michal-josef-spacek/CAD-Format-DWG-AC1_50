@@ -272,7 +272,7 @@ types:
       - id: attributes
         enum: attributes
         type: s2
-        doc: 0x0192-0x0193, $ATTMODE
+        doc: 0x0192-0x0193, $ATTMODE/70
       - id: menu
         size: 15
         type: str
