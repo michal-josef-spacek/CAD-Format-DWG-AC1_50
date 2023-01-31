@@ -343,10 +343,10 @@ sub _read {
     }
     $self->{point_from} = CAD::Format::DWG::AC1_50::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{height} = $self->{_io}->read_f8le();
-    $self->{value_size} = $self->{_io}->read_s2le();
-    $self->{value} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->value_size()), 0, 0));
-    $self->{tag_size} = $self->{_io}->read_s2le();
-    $self->{tag} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->tag_size()), 0, 0));
+    $self->{len_value} = $self->{_io}->read_s2le();
+    $self->{value} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->len_value()), 0, 0));
+    $self->{len_tag} = $self->{_io}->read_s2le();
+    $self->{tag} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->len_tag()), 0, 0));
     $self->{flags} = CAD::Format::DWG::AC1_50::AttrFlags->new($self->{_io}, $self, $self->{_root});
     if ($self->entity_common()->flag2_7()) {
         $self->{rotation_angle_in_radians} = $self->{_io}->read_f8le();
@@ -421,9 +421,9 @@ sub height {
     return $self->{height};
 }
 
-sub value_size {
+sub len_value {
     my ($self) = @_;
-    return $self->{value_size};
+    return $self->{len_value};
 }
 
 sub value {
@@ -431,9 +431,9 @@ sub value {
     return $self->{value};
 }
 
-sub tag_size {
+sub len_tag {
     my ($self) = @_;
-    return $self->{tag_size};
+    return $self->{len_tag};
 }
 
 sub tag {
