@@ -42,7 +42,7 @@ seq:
     repeat-expr: header.table_view.items
   - id: block_entities
     type: real_entities
-    size: header.blocks_size
+    size: header.block_entities_size
   - id: todo
     size-eos: true
     repeat: eos
@@ -100,19 +100,17 @@ types:
       - id: dwg_version
         type: s1
       - id: entities_start
-        type: u4
+        type: s4
       - id: entities_end
+        type: s4
+      - id: block_entities_start
+        type: s4
+      - id: block_entities_size_raw
         type: u4
-      - id: blocks_start
+      - id: extra_entities_start
+        type: s4
+      - id: extra_entities_size_raw
         type: u4
-      - id: blocks_size_raw
-        type: u4
-      - id: blocks_end
-        type: u4
-      - id: unknown4b
-        size: 2
-      - id: unknown4c
-        size: 2
       - id: table_block
         type: table
       - id: table_layer
@@ -126,10 +124,16 @@ types:
       - id: variables
         type: header_variables
     instances:
-      blocks_size_unknown:
-         value: (blocks_size_raw & 0xff000000) >> 24
-      blocks_size:
-         value: (blocks_size_raw & 0x00ffffff)
+      entities_size:
+         value: entities_end - entities_start
+      extra_entities_size_unknown:
+         value: (extra_entities_size_raw & 0xff000000) >> 24
+      extra_entities_size:
+         value: (extra_entities_size_raw & 0x00ffffff)
+      block_entities_size_unknown:
+         value: (block_entities_size_raw & 0xff000000) >> 24
+      block_entities_size:
+         value: (block_entities_size_raw & 0x00ffffff)
   table:
     seq:
       - id: item_size

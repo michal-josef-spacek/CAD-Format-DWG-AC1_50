@@ -141,7 +141,7 @@ sub _read {
     for (my $i = 0; $i < $n_views; $i++) {
         push @{$self->{views}}, CAD::Format::DWG::AC1_50::View->new($self->{_io}, $self, $self->{_root});
     }
-    $self->{_raw_block_entities} = $self->{_io}->read_bytes($self->header()->blocks_size());
+    $self->{_raw_block_entities} = $self->{_io}->read_bytes($self->header()->block_entities_size());
     my $io__raw_block_entities = IO::KaitaiStruct::Stream->new($self->{_raw_block_entities});
     $self->{block_entities} = CAD::Format::DWG::AC1_50::RealEntities->new($io__raw_block_entities, $self, $self->{_root});
     if (!($self->_io()->is_eof())) {
@@ -3766,13 +3766,12 @@ sub _read {
     $self->{num_sections} = $self->{_io}->read_s2le();
     $self->{num_header_vars} = $self->{_io}->read_s2le();
     $self->{dwg_version} = $self->{_io}->read_s1();
-    $self->{entities_start} = $self->{_io}->read_u4le();
-    $self->{entities_end} = $self->{_io}->read_u4le();
-    $self->{blocks_start} = $self->{_io}->read_u4le();
-    $self->{blocks_size_raw} = $self->{_io}->read_u4le();
-    $self->{blocks_end} = $self->{_io}->read_u4le();
-    $self->{unknown4b} = $self->{_io}->read_bytes(2);
-    $self->{unknown4c} = $self->{_io}->read_bytes(2);
+    $self->{entities_start} = $self->{_io}->read_s4le();
+    $self->{entities_end} = $self->{_io}->read_s4le();
+    $self->{block_entities_start} = $self->{_io}->read_s4le();
+    $self->{block_entities_size_raw} = $self->{_io}->read_u4le();
+    $self->{extra_entities_start} = $self->{_io}->read_s4le();
+    $self->{extra_entities_size_raw} = $self->{_io}->read_u4le();
     $self->{table_block} = CAD::Format::DWG::AC1_50::Table->new($self->{_io}, $self, $self->{_root});
     $self->{table_layer} = CAD::Format::DWG::AC1_50::Table->new($self->{_io}, $self, $self->{_root});
     $self->{table_style} = CAD::Format::DWG::AC1_50::Table->new($self->{_io}, $self, $self->{_root});
@@ -3781,18 +3780,39 @@ sub _read {
     $self->{variables} = CAD::Format::DWG::AC1_50::HeaderVariables->new($self->{_io}, $self, $self->{_root});
 }
 
-sub blocks_size_unknown {
+sub block_entities_size {
     my ($self) = @_;
-    return $self->{blocks_size_unknown} if ($self->{blocks_size_unknown});
-    $self->{blocks_size_unknown} = (($self->blocks_size_raw() & 4278190080) >> 24);
-    return $self->{blocks_size_unknown};
+    return $self->{block_entities_size} if ($self->{block_entities_size});
+    $self->{block_entities_size} = ($self->block_entities_size_raw() & 16777215);
+    return $self->{block_entities_size};
 }
 
-sub blocks_size {
+sub extra_entities_size_unknown {
     my ($self) = @_;
-    return $self->{blocks_size} if ($self->{blocks_size});
-    $self->{blocks_size} = ($self->blocks_size_raw() & 16777215);
-    return $self->{blocks_size};
+    return $self->{extra_entities_size_unknown} if ($self->{extra_entities_size_unknown});
+    $self->{extra_entities_size_unknown} = (($self->extra_entities_size_raw() & 4278190080) >> 24);
+    return $self->{extra_entities_size_unknown};
+}
+
+sub block_entities_size_unknown {
+    my ($self) = @_;
+    return $self->{block_entities_size_unknown} if ($self->{block_entities_size_unknown});
+    $self->{block_entities_size_unknown} = (($self->block_entities_size_raw() & 4278190080) >> 24);
+    return $self->{block_entities_size_unknown};
+}
+
+sub entities_size {
+    my ($self) = @_;
+    return $self->{entities_size} if ($self->{entities_size});
+    $self->{entities_size} = ($self->entities_end() - $self->entities_start());
+    return $self->{entities_size};
+}
+
+sub extra_entities_size {
+    my ($self) = @_;
+    return $self->{extra_entities_size} if ($self->{extra_entities_size});
+    $self->{extra_entities_size} = ($self->extra_entities_size_raw() & 16777215);
+    return $self->{extra_entities_size};
 }
 
 sub magic {
@@ -3840,29 +3860,24 @@ sub entities_end {
     return $self->{entities_end};
 }
 
-sub blocks_start {
+sub block_entities_start {
     my ($self) = @_;
-    return $self->{blocks_start};
+    return $self->{block_entities_start};
 }
 
-sub blocks_size_raw {
+sub block_entities_size_raw {
     my ($self) = @_;
-    return $self->{blocks_size_raw};
+    return $self->{block_entities_size_raw};
 }
 
-sub blocks_end {
+sub extra_entities_start {
     my ($self) = @_;
-    return $self->{blocks_end};
+    return $self->{extra_entities_start};
 }
 
-sub unknown4b {
+sub extra_entities_size_raw {
     my ($self) = @_;
-    return $self->{unknown4b};
-}
-
-sub unknown4c {
-    my ($self) = @_;
-    return $self->{unknown4c};
+    return $self->{extra_entities_size_raw};
 }
 
 sub table_block {
