@@ -20,23 +20,23 @@ seq:
   - id: entities
     type: real_entities
     size: header.entities_end - header.entities_start
-  - id: blocks
+  - id: table_blocks
     type: block
     repeat: expr
     repeat-expr: header.table_block.items
-  - id: layers
+  - id: table_layers
     type: layer
     repeat: expr
     repeat-expr: header.table_layer.items
-  - id: styles
+  - id: table_styles
     type: style
     repeat: expr
     repeat-expr: header.table_style.items
-  - id: linetypes
+  - id: table_linetypes
     type: linetype
     repeat: expr
     repeat-expr: header.table_linetype.items
-  - id: views
+  - id: table_views
     type: view
     repeat: expr
     repeat-expr: header.table_view.items
