@@ -116,15 +116,15 @@ types:
       - id: extra_entities_size_raw
         type: u4
       - id: table_block
-        type: table
+        type: header_table
       - id: table_layer
-        type: table
+        type: header_table
       - id: table_style
-        type: table
+        type: header_table
       - id: table_linetype
-        type: table
+        type: header_table
       - id: table_view
-        type: table
+        type: header_table
       - id: variables
         type: header_variables
     instances:
@@ -138,7 +138,7 @@ types:
          value: (block_entities_size_raw & 0xff000000) >> 24
       block_entities_size:
          value: (block_entities_size_raw & 0x00ffffff)
-  table:
+  header_table:
     seq:
       - id: item_size
         type: u2
