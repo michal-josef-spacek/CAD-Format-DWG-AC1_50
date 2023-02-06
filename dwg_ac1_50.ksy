@@ -40,7 +40,7 @@ seq:
     type: view
     repeat: expr
     repeat-expr: header.table_view.items
-  - id: block_entities
+  - id: entities_block
     type: real_entities
     size: header.block_entities_size
   - id: entities_extra
