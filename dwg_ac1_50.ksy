@@ -129,15 +129,15 @@ types:
         type: header_variables
     instances:
       entities_size:
-         value: entities_end - entities_start
+        value: entities_end - entities_start
       extra_entities_size_unknown:
-         value: (extra_entities_size_raw & 0xff000000) >> 24
+        value: (extra_entities_size_raw & 0xff000000) >> 24
       extra_entities_size:
-         value: (extra_entities_size_raw & 0x00ffffff)
+        value: (extra_entities_size_raw & 0x00ffffff)
       block_entities_size_unknown:
-         value: (block_entities_size_raw & 0xff000000) >> 24
+        value: (block_entities_size_raw & 0xff000000) >> 24
       block_entities_size:
-         value: (block_entities_size_raw & 0x00ffffff)
+        value: (block_entities_size_raw & 0x00ffffff)
   header_table:
     seq:
       - id: item_size
