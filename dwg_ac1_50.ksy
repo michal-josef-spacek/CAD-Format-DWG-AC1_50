@@ -428,10 +428,10 @@ types:
             'entities::block_end': entity_block_end
             'entities::insert' : entity_insert
             'entities::circle': entity_circle
+            'entities::jump': entity_jump
             'entities::line': entity_line
             'entities::point': entity_point
             'entities::polyline': entity_polyline
-            'entities::polyline2': entity_polyline
             'entities::repeat_begin': entity_repeat_begin
             'entities::repeat_end': entity_repeat_end
             'entities::seqend': entity_seqend
@@ -861,6 +861,22 @@ types:
       - id: radius
         type: f8
         doc: CIRCLE/40
+  entity_jump:
+    seq:
+      - id: entity_mode
+        type: entity_mode
+      - id: entity_size
+        type: s2
+      - id: address_raw
+        type: u4
+      - id: unknown_data
+        size: entity_size - 8
+        if: entity_size > 8
+    instances:
+      address_flag:
+        value: (address_raw & 0xff000000) >> 24
+      address:
+        value: (address_raw & 0x00ffffff)
   entity_line:
     seq:
       - id: entity_mode
@@ -1538,8 +1554,8 @@ enums:
     15: attdef
     16: attrib
     17: seqend
-    18: polyline
-    19: polyline2
+    18: jump
+    19: polyline
     20: vertex
   osnap_modes:
     0: none
