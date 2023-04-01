@@ -3768,7 +3768,7 @@ sub _read {
     if ($self->entity_mode()->has_thickness()) {
         $self->{entity_thickness} = $self->{_io}->read_f8le();
     }
-    $self->{unknown} = $self->{_io}->read_bytes(4);
+    $self->{begin_addr} = $self->{_io}->read_s4le();
 }
 
 sub entity_mode {
@@ -3811,9 +3811,9 @@ sub entity_thickness {
     return $self->{entity_thickness};
 }
 
-sub unknown {
+sub begin_addr {
     my ($self) = @_;
-    return $self->{unknown};
+    return $self->{begin_addr};
 }
 
 ########################################################################

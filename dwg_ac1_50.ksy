@@ -1077,8 +1077,8 @@ types:
       - id: entity_thickness
         type: f8
         if: entity_mode.has_thickness
-      - id: unknown
-        size: 4
+      - id: begin_addr
+        type: s4
   entity_shape:
     seq:
       - id: entity_mode
