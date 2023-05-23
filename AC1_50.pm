@@ -3105,11 +3105,12 @@ sub _read {
     $self->{text_size} = $self->{_io}->read_f8le();
     $self->{trace_width} = $self->{_io}->read_f8le();
     $self->{current_layer_index} = $self->{_io}->read_s2le();
-    $self->{current_color_convert} = $self->{_io}->read_s2le();
-    $self->{unknown6} = $self->{_io}->read_f8le();
-    $self->{unknown7a} = $self->{_io}->read_s2le();
-    $self->{unknown7b} = $self->{_io}->read_s2le();
-    $self->{unknown7c} = $self->{_io}->read_s2le();
+    $self->{current_color_convert_lo} = $self->{_io}->read_s4le();
+    $self->{current_color_convert_hi} = $self->{_io}->read_s4le();
+    $self->{unknown1} = $self->{_io}->read_s2le();
+    $self->{unknown2} = $self->{_io}->read_s2le();
+    $self->{unknown3} = $self->{_io}->read_s2le();
+    $self->{unknown4} = $self->{_io}->read_s2le();
     $self->{aspect_ratio} = $self->{_io}->read_f8le();
     $self->{linear_units_format} = $self->{_io}->read_s2le();
     $self->{linear_units_precision} = $self->{_io}->read_s2le();
@@ -3291,29 +3292,34 @@ sub current_layer_index {
     return $self->{current_layer_index};
 }
 
-sub current_color_convert {
+sub current_color_convert_lo {
     my ($self) = @_;
-    return $self->{current_color_convert};
+    return $self->{current_color_convert_lo};
 }
 
-sub unknown6 {
+sub current_color_convert_hi {
     my ($self) = @_;
-    return $self->{unknown6};
+    return $self->{current_color_convert_hi};
 }
 
-sub unknown7a {
+sub unknown1 {
     my ($self) = @_;
-    return $self->{unknown7a};
+    return $self->{unknown1};
 }
 
-sub unknown7b {
+sub unknown2 {
     my ($self) = @_;
-    return $self->{unknown7b};
+    return $self->{unknown2};
 }
 
-sub unknown7c {
+sub unknown3 {
     my ($self) = @_;
-    return $self->{unknown7c};
+    return $self->{unknown3};
+}
+
+sub unknown4 {
+    my ($self) = @_;
+    return $self->{unknown4};
 }
 
 sub aspect_ratio {

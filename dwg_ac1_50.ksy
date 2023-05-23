@@ -226,19 +226,22 @@ types:
       - id: current_layer_index
         type: s2
         doc: 0x014a-0x014b, $CLAYER
-      - id: current_color_convert
+      - id: current_color_convert_lo
+        type: s4
+        doc: 0x014c-0x014f
+      - id: current_color_convert_hi
+        type: s4
+        doc: 0x0150-0x0153
+      - id: unknown1
         type: s2
-        doc: 0x014c-0x014d, (2, 3, 8, 15 - default)
-      - id: unknown6
-        type: f8
-        doc: 0x014e-0x0155
-      - id: unknown7a
+        doc: 0x0154-0x0155
+      - id: unknown2
         type: s2
         doc: 0x0156-0x0157
-      - id: unknown7b
+      - id: unknown3
         type: s2
         doc: 0x0158-0x0159
-      - id: unknown7c
+      - id: unknown4
         type: s2
         doc: 0x015a-0x015b
       - id: aspect_ratio
